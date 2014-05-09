@@ -6,7 +6,8 @@
 virtualenv env --no-site-packages
 ```
 ###Install all requirements
-``` . env/bin/activate
+```
+. env/bin/activate
 pip install requirements/base.txt
 ```
 ###Configure application
