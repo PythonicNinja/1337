@@ -10,3 +10,4 @@ oauth2==1.5.211
 python-openid==2.2.5
 sqlparse==0.1.11
 wsgiref==0.1.2
+django-front==0.2.6

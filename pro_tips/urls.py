@@ -6,7 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
-    # url(r'^$', 'pro_tips.views.home', name='home'),
+    url(r'^$', include('pro_tips.apps.sites.urls') , name='home'),
     url(r'^accounts/', include('pro_tips.apps.accounts.urls')),
 
     #include django-admin urls
@@ -15,5 +15,5 @@ urlpatterns = patterns('',
 
     #Third-party apps urls
     url(r'', include('social_auth.urls')),
-
+    url(r'^front-edit/', include('front.urls')),
 )

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from adminsortable import admin as sortable
 from django.contrib import admin
-from tips.models import Tip, Vote
+from pro_tips.apps.tips.models import Tip, Vote
 
 
 class TipAdmin(admin.ModelAdmin):
