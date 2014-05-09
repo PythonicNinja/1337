@@ -1,7 +1,7 @@
 from django import template
 from django.contrib.auth.forms import AuthenticationForm
 
-from urban.apps.user_profiles.forms import CUserCreationForm
+from pro_tips.apps.accounts.forms import CUserCreationForm
 
 register = template.Library()
 

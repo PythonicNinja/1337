@@ -8,8 +8,8 @@ from django.shortcuts import render_to_response, redirect
 from django.contrib.messages.api import get_messages
 from django.template.response import TemplateResponse
 
-from social_auth import __version__ as version
-from urban.apps.user_profiles.forms import CUserCreationForm
+
+from pro_tips.apps.accounts.forms import CUserCreationForm
 
 
 ###PROFILE

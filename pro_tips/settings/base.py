@@ -1,4 +1,5 @@
 """Common settings and globals."""
+
 from os.path import abspath, basename, dirname, join, normpath
 from sys import path
 
@@ -64,7 +65,14 @@ DATABASES = {
 TIME_ZONE = 'Europe/Warsaw'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pl'
+
+LANGUAGES = (
+    ## Customize this
+    ('pl', ('PL')),
+    ('en', ('EN')),
+    ('de', ('DE')),
+)
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
@@ -107,6 +115,8 @@ STATICFILES_FINDERS = (
 )
 ########## END STATIC FILE CONFIGURATION
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 ########## SECRET CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
@@ -148,6 +158,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
+    'django.template.loaders.eggs.Loader',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs

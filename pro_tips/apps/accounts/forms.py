@@ -2,7 +2,7 @@
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from urban.apps.user_profiles.models import CUser
+from .models import CUser
 
 
 class CUserCreationForm(UserCreationForm):
