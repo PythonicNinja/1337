@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block content %}
+
+<section id="news">
+        <h2 class="section-title">{% trans "User profile" %} {{ request.user }}</h2>
+
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="nav nav-pills nav-stacked news-list">
+                    <li class="active">
+                        <a href="#news1" data-toggle="tab" class="">
+                            <h2><i class="icon-trophy"></i>{% trans "Achivements" %}</h2>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#news2" data-toggle="tab" class="">
+                            <h2><i class="icon-gauge"></i>{% trans "Settings" %}</h2>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#news2" data-toggle="tab" class="">
+                            <h2><i class="icon-magic"></i>{% trans "Missions" %}</h2>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#news2" data-toggle="tab" class="">
+                            <h2><i class="icon-alert"></i>{% trans "Alerts" %}</h2>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#news2" data-toggle="tab" class="">
+                            <h2><i class="icon-heart"></i>{% trans "Fallowers" %}</h2>
+                        </a>
+                    </li>
+
+                </ul>
+                <!-- list-group -->
+            </div>
+            <div class="col-md-6">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="news1">
+                        <article class="news-content">
+                            <h3 class="news-content-title">News Item Number 1</h3>
+                            <img src="{% static 'img/samples/news1.jpg' %}" class="img-responsive" alt="Image">
+
+                            <p>Lorem ipsum Esse laborum ut in non irure pariatur in sunt labore irure veniam nulla irure
+                                exercitation occaecat deserunt qui adipisicing sed magna proident reprehenderit officia
+                                ut magna Ut Ut.</p>
+
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Operam comparandae tutiorem diu
+                                optimus conquisitis agatur modus dolor voluptas, omittam graeca ista, homo adiuvet
+                                occultum verbi imagines physico faciunt. Dicere loquuntur consequentis artibus afranius,
+                                rudem remotis pericula cumque, nescio causam repellendus, amotio derepta laborum
+                                occultarum.</p>
+
+                            <p>Lorem ipsum Dolor nisi anim Duis sint ad minim fugiat commodo qui do irure eiusmod
+                                laborum nisi ullamco sunt tempor est nostrud. Lorem ipsum Culpa magna aute qui in enim
+                                ex cupidatat voluptate in aliquip pariatur esse est.</p>
+                        </article>
+                    </div>
+                    <div class="tab-pane fade" id="news2">
+                        <article class="news-content">
+                            <h3 class="news-content-title">News Item Number 2</h3>
+                            <img src="{% static 'img/samples/news2.jpg' %}" class="img-responsive" alt="Image">
+
+                            <p>Aliquip pariatur esse Excepteur enim Duis in ex dolor amet aute mollit officia aliqua
+                                dolor laboris consequat incididunt sit cillum veniam Excepteur esse laborum exercitation
+                                mollit commodo sunt. Lorem ipsum Enim anim mollit sed. Lorem ipsum Ea in in occaecat
+                                sunt laboris. Lorem ipsum Tempor enim dolor ut culpa aliquip.</p>
+
+                            <p>Ullamco deserunt cupidatat ut ut velit laboris. physico faciunt. Dicere loquuntur
+                                consequentis artibus afranius, rudem remotis pericula cumque, nescio causam repellendus,
+                                amotio derepta laborum occultarum.</p>
+
+                            <p>Lorem ipsum Mollit Ut dolor adipisicing pariatur sed esse sit elit non dolor. Lorem ipsum
+                                Commodo commodo Ut reprehenderit do cillum incididunt elit pariatur velit commodo. Lorem
+                                ipsum Consequat est Duis culpa sed.</p>
+                        </article>
+                    </div>
+
+                    </div>
+                </div>
+                <!-- tab-content -->
+            </div>
+        </div>
+    </section> <!-- news -->
+
+{% endblock %}
