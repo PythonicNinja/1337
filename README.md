@@ -1,4 +1,6 @@
 1337
 ====
 
-RoR
+django project 
+our inspiration
+http://codingstyleguide.com/
