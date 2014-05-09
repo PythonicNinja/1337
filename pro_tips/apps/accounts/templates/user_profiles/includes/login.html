@@ -1,0 +1,145 @@
+{% load bootstrap i18n %}
+
+{% if user.is_authenticated %}
+    <div class="col-sm-4 col-sm-offset-8">
+
+        <a href="{% url 'user_profiles:user-profile' %}">
+        <button class="btn btn-default">
+            <i class="icon-user"></i> {% trans "Profile" %} {{ user.first_name }}
+        </button>
+        </a>
+        <a href="{% url 'user_profiles:logout' %}">
+            <button class="btn btn-default">
+                <i class="icon-logout"> </i>{% trans 'Log out' %}
+            </button>
+        </a>
+    </div>
+{% else %}
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-8">
+
+            <button class="btn btn-default" data-toggle="modal" data-target="#registerModal">
+                <span class="glyphicon glyphicon-list-alt"> </span> {% trans 'sign up' %}
+            </button>
+            <button class="btn btn-default" data-toggle="modal" data-target="#loginModal">
+                <span class="glyphicon glyphicon-log-in"> </span> {% trans 'sign in' %}
+            </button>
+        </div>
+
+    </div>
+    <!-- Login Modal -->
+
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">{% trans 'Log in' %}</h4>
+                </div>
+                <form action="{% url 'user_profiles:login' %}" method="POST">
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {% for field in form_login %}
+                            {{ field|bootstrap }}
+                        {% endfor %}
+                        <button type="submit" class="btn btn-danger pull-right">{% trans 'Log in' %}</button>
+                        <br/>
+                        <hr>
+
+                            <div class="row social-auth-wrapper">
+
+                                <div class="col-lg-4">
+                                    <a href="{% url "socialauth_begin" "twitter" %}">
+                                        <div class="social-auth-box btn-danger">
+                                            <i class="icon-twitter-circled"></i> Twitter
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <a href="{% url "socialauth_begin" "facebook" %}">
+                                        <div class="social-auth-box btn-danger">
+                                            <i class="icon-facebook-2"></i> Facebook
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <a href="{% url "socialauth_begin" "google-oauth2" %}">
+                                        <div class="social-auth-box btn-danger">
+                                            <i class="icon-google"></i> Google
+                                        </div>
+                                    </a>
+                                </div>
+
+                            </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">{% trans 'Registration Form' %}</h4>
+                </div>
+                <form action="{% url 'user_profiles:register' %}" method="POST">
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {% for field in form_register %}
+                            {{ field|bootstrap }}
+                        {% endfor %}
+                        <button type="submit" class="btn btn-danger pull-right">{% trans 'Register' %}</button>
+                        <br/>
+                        <hr>
+                            <div class="row social-auth-wrapper">
+
+                                <div class="col-lg-4">
+                                    <a href="{% url "socialauth_begin" "twitter" %}">
+                                        <div class="social-auth-box btn-danger">
+                                            <i class="icon-twitter-circled"></i> Twitter
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <a href="{% url "socialauth_begin" "facebook" %}">
+                                        <div class="social-auth-box btn-danger">
+                                            <i class="icon-facebook-2"></i> Facebook
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <a href="{% url "socialauth_begin" "google-oauth2" %}">
+                                        <div class="social-auth-box btn-danger">
+                                            <i class="icon-google"></i> Google
+                                        </div>
+                                    </a>
+                                </div>
+
+                            </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">{% trans 'Close' %}</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+{% endif %}

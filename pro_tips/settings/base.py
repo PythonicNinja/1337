@@ -190,7 +190,6 @@ DJANGO_APPS = (
     # Admin panel and documentation:
     'grappelli', # THIRD PARTY APPS BUT MUST BE BEFORE ADMIN
     'django.contrib.admin',
-    'django.contrib.gis',
     # 'django.contrib.admindocs',
 )
 
@@ -204,7 +203,7 @@ THIRD_PARTY_APPS = (
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
-    'apps.user_area',
+    'apps.accounts',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -219,7 +218,7 @@ WSGI_APPLICATION = '%s.wsgi.application' % SITE_NAME
 
 
 ########## USER AUTH CONFIGUTATION
-AUTH_USER_MODEL = 'user_area.CUser'
+AUTH_USER_MODEL = 'accounts.CUser'
 
 LOGIN_URL = '/login-form/'
 LOGIN_REDIRECT_URL = '/'
@@ -237,7 +236,7 @@ AUTHENTICATION_BACKENDS = (
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
-SOCIAL_AUTH_USER_MODEL = 'user_area.CUser'
+SOCIAL_AUTH_USER_MODEL = 'accounts.CUser'
 SOCIAL_AUTH_ERROR_KEY = 'socialauth_error'
 
 SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
