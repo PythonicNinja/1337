@@ -201,7 +201,6 @@ DJANGO_APPS = (
     # Admin panel and documentation:
     'grappelli', # THIRD PARTY APPS BUT MUST BE BEFORE ADMIN
     'django.contrib.admin',
-    'django.contrib.gis',
     # 'django.contrib.admindocs',
 )
 
@@ -215,7 +214,7 @@ THIRD_PARTY_APPS = (
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
-    'apps.user_area',
+    'apps.accounts',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -230,7 +229,7 @@ WSGI_APPLICATION = '%s.wsgi.application' % SITE_NAME
 
 
 ########## USER AUTH CONFIGUTATION
-AUTH_USER_MODEL = 'user_area.CUser'
+AUTH_USER_MODEL = 'accounts.CUser'
 
 LOGIN_URL = '/login-form/'
 LOGIN_REDIRECT_URL = '/'
