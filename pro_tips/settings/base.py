@@ -112,6 +112,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
 ########## END STATIC FILE CONFIGURATION
 
@@ -212,6 +213,9 @@ THIRD_PARTY_APPS = (
     'adminsortable',
     'bootstrapform',
     'front',
+    'rest_framework',
+    'compressor',
+    'django_extensions',
 )
 
 # Apps specific for this project go here.
@@ -219,6 +223,7 @@ LOCAL_APPS = (
     'apps.accounts',
     'apps.sites',
     'apps.tips',
+    'apps.api',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -278,3 +283,7 @@ SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
 
 SOCIAL_AUTH_ENABLED_BACKENDS = ('google', 'facebook', 'twitter')
 ##########  END SOCIAL AUTH CONFIGURATION
+
+COMPRESS_PRECOMPILERS = (
+    ('text/less', 'lessc {infile} {outfile}'),
+)

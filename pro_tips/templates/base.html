@@ -1,4 +1,4 @@
-{% load front_tags %}
+{% load front_tags compress %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,14 +11,16 @@
 
     <title>{{ TITLE }}</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="{{ STATIC_URL }}bower_components/bootstrap/css/bootstrap.min.css"
-          rel="stylesheet">
-    <link href="{{ STATIC_URL }}bower_components/fontawesome/css/font-awesome.min.css"
-          rel="stylesheet">
-    <link href="{{ STATIC_URL }}less/style.css"
-          rel="stylesheet">
-    {% block extra_css %}{% endblock extra_css %}
+    {% compress css %}
+        <!-- Bootstrap core CSS -->
+        <link href="{{ STATIC_URL }}bower_components/bootstrap/css/bootstrap.min.css"
+              rel="stylesheet">
+        <link href="{{ STATIC_URL }}bower_components/fontawesome/css/font-awesome.min.css"
+              rel="stylesheet">
+        <link href="{{ STATIC_URL }}less/style.less"
+              rel="stylesheet">
+        {% block extra_css %}{% endblock extra_css %}
+    {% endcompress %}
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

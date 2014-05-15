@@ -10,15 +10,23 @@ SUPPORTED_LANGUAGES = [
     ('c++', u'C++'),
 ]
 
+class Languages(models.Model):
+    name = models.CharField(verbose_name=_('Language'), max_length=255)
+    shortcut = models.CharField(verbose_name=_('Shortcut'), max_length=155)
+
+    def __unicode__(self):
+        return u"%s (%s)" %(self.name, self.shortcut)
+
 
 class Tip(models.Model):
     user = models.ForeignKey("accounts.CUser", verbose_name=_("Published by:"))
     title = models.CharField(_("Title"), max_length=128)
     description = models.TextField(_("Tip"))
-    language = models.CharField(_("Language"), max_length=30, choices=SUPPORTED_LANGUAGES)
+    language = models.ForeignKey("tips.Languages", verbose_name=_("Language"))
     created = models.DateTimeField(_("Created"), auto_created=True)
 
-
+    def __unicode__(self):
+        return u"%s (%s)" %(self.title, self.language)
 
 class VoteManager(models.Manager):
     def get_rating(self):
@@ -34,8 +42,13 @@ class Vote(models.Model):
     user = models.ForeignKey('accounts.CUser', verbose_name=_(u'User'))
     objects = VoteManager()
 
+    def __unicode__(self):
+        return u"%s (%s)" %(self.type, self.user)
+
 
 class Favourite(models.Model):
     user = models.ForeignKey('accounts.CUser', verbose_name=_(u'User'))
     tip = models.ForeignKey('tips.Tip', verbose_name=_('Tip'))
 
+    def __unicode__(self):
+        return u"%s (%s)" %(self.tip, self.user)

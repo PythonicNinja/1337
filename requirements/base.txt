@@ -11,3 +11,6 @@ python-openid==2.2.5
 sqlparse==0.1.11
 wsgiref==0.1.2
 django-front==0.2.6
+djangorestframework
+django_compressor
+django-extensions
