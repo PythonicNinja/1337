@@ -19,3 +19,9 @@ class LanguageSerializer(serializers.ModelSerializer):
     # def get_img(self, obj):
     #     return obj.image.url
 
+
+class TipSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Tip
+
