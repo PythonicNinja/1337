@@ -6,14 +6,15 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
-    url(r'^$', include('pro_tips.apps.main_sites.urls') , name='home'),
+    url(r'^', include('pro_tips.apps.main_sites.urls') , name='home'),
+
     url(r'^accounts/', include('pro_tips.apps.accounts.urls', namespace="accounts")),
     url(r'^api/', include('pro_tips.apps.api.urls', namespace="api")),
 
 
     url(r'^comments/', include('django.contrib.comments.urls')),
     #include django-admin urls
-    url(r'^grap   pelli/', include('grappelli.urls')), # grappelli URLS
+    url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
     url(r'^admin/', include(admin.site.urls)),
 
 

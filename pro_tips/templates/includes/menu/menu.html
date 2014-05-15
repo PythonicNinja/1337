@@ -13,18 +13,23 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
+            <li><a href="/">{% trans "Home" %}</a></li>
             {% if not request.user.is_authenticated %}
-                <li><a href="{% url "accounts:login" %}"><i class="glyphicon glyphicon-log-in"></i> Log in</a></li>
-                <li><a href="{% url "accounts:register" %}"><i class="glyphicon glyphicon-registration-mark"></i> Register</a></li>
-                <li><a href="{% url "socialauth_begin" "facebook" %}"><i class="fa fa-facebook"></i> Sign in by FB</a></li>
-                <li><a href="{% url "socialauth_begin" "github" %}"><i class="fa fa-github"></i> Sign in by GitHub</a></li>
-                <li><a href="{% url "socialauth_begin" "google-oauth2" %}"><i class="fa fa-google-plus"></i> Sign in by Google</a></li>
+                <li><a href="{% url "accounts:login" %}"><i class="glyphicon glyphicon-log-in"></i> {% trans "Log in" %}</a></li>
+                <li><a href="{% url "accounts:register" %}"><i class="glyphicon glyphicon-registration-mark"></i> {% trans "Register" %}</a></li>
+                <li><a href="{% url "socialauth_begin" "facebook" %}"><i class="fa fa-facebook"></i> {% trans "Sign in by FB" %}</a></li>
+                <li><a href="{% url "socialauth_begin" "github" %}"><i class="fa fa-github"></i> {% trans "Sign in by GitHub" %}</a></li>
+                <li><a href="{% url "socialauth_begin" "google-oauth2" %}"><i class="fa fa-google-plus"></i> {% trans "Sign in by Google" %}</a></li>
             {% else %}
-                <li><a href="{% url "accounts:user-profile" %}"><i class="fa fa-user"></i> User profile</a></li>
-                <li><a href="{% url "accounts:logout" %}"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
+                <li><a href="{% url "accounts:user-profile" %}"><i class="fa fa-user"></i> {% trans "User profile" %}</a></li>
+                <li><a href="{% url "accounts:logout" %}"><i class="glyphicon glyphicon-log-out"></i> {% trans "Logout" %}</a></li>
             {% endif %}
           </ul>
+          {% if request.user.is_staff %}
+              <ul class="nav navbar-nav pull-right">
+                    <li><a href="{% url "admin:index" %}"><i class="glyphicon glyphicon-globe"></i> {% trans "Admin" %}</a></li>
+              </ul>
+            {% endif %}
         </div><!--/.nav-collapse -->
       </div>
     </div>

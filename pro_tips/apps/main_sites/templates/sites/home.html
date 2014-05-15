@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load front_tags %}
+{% load front_tags i18n %}
 
 {% block content %}
     <!-- Main component for a primary marketing message or call to action -->
@@ -17,10 +17,23 @@
             <p>To see the difference between static and fixed top navbars,
                 just scroll.</p>
         {% end_front_edit %}
+    </div>
 
-        <p>
-            <a class="btn btn-lg btn-primary" href="#navbar"
-               role="button">View navbar docs &raquo;</a>
-        </p>
+    <div class="row">
+        {% for language in languages %}
+        <a href="{% url "api:tips" %}?language={{ language.pk }}">
+            <div class="col-xs-18 col-sm-6 col-md-3">
+              <div class="thumbnail">
+                  {% if language.image %}
+                  {% else %}
+                    <img src="http://placehold.it/500x300" alt="">
+                  {% endif %}
+                  <div class="caption">
+                    <h2>{{ language.name }}</h2>
+                </div>
+              </div>
+            </div>
+        </a>
+        {% endfor %}
     </div>
 {% endblock %}

@@ -1,6 +1,6 @@
-from contrib.comments import Comment
-from contrib.comments.templatetags.comments import CommentListNode
-from contrib.sites.models import Site
+from django.contrib.comments import Comment
+from django.contrib.comments.templatetags.comments import CommentListNode
+from django.contrib.sites.models import Site
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.

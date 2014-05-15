@@ -14,3 +14,4 @@ django-front==0.2.6
 djangorestframework
 django_compressor
 django-extensions
+Pillow
