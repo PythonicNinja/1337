@@ -4,10 +4,12 @@ from django.utils.translation import gettext_lazy as _
 
 SUPPORTED_LANGUAGES = [
     ('python', u'Python'),
-    ('javascript', u'Python'),
+    ('javascript', u'Javascript'),
     ('ruby', u'Ruby'),
     ('c#', u'C#'),
     ('c++', u'C++'),
+    ('java', u'Java'),
+    ('scala', u'Scala'),
 ]
 
 class Languages(models.Model):
