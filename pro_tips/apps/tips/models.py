@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from django.contrib.comments import Comment
+from django.contrib.contenttypes.generic import GenericRelation
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -15,9 +17,9 @@ SUPPORTED_LANGUAGES = [
 class Languages(models.Model):
     name = models.CharField(verbose_name=_('Language'), max_length=255)
     shortcut = models.CharField(verbose_name=_('Shortcut'), max_length=155)
-
-    def __unicode__(self):
-        return u"%s (%s)" %(self.name, self.shortcut)
+    #
+    # def __unicode__(self):
+    #     return u"%s (%s)" %(self.name, self.shortcut)
 
 
 class Tip(models.Model):
@@ -26,9 +28,10 @@ class Tip(models.Model):
     description = models.TextField(_("Tip"))
     language = models.ForeignKey("tips.Languages", verbose_name=_("Language"))
     created = models.DateTimeField(_("Created"), auto_created=True)
+    comments = GenericRelation(Comment, content_type_field='content_type', object_id_field='object_pk')
 
-    def __unicode__(self):
-        return u"%s (%s)" %(self.title, self.language)
+    # def __unicode__(self):
+    #     return u"%s (%s)" %(self.title, self.language)
 
 class VoteManager(models.Manager):
     def get_rating(self):
@@ -42,10 +45,10 @@ VOTE_CHOICES = [
 class Vote(models.Model):
     type = models.BooleanField(default=False, choices=VOTE_CHOICES)
     user = models.ForeignKey('accounts.CUser', verbose_name=_(u'User'))
-    objects = VoteManager()
-
-    def __unicode__(self):
-        return u"%s (%s)" %(self.type, self.user)
+    # objects = VoteManager()
+    #
+    # def __unicode__(self):
+    #     return u"%s (%s)" %(self.type, self.user)
 
 
 class Favourite(models.Model):

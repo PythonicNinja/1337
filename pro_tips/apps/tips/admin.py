@@ -11,7 +11,7 @@ class TipAdmin(admin.ModelAdmin):
     class Meta:
         model = Tip
 
-    def rating(self):
+    def rating(self, instance):
         return Vote.objects.get_rating()
 
     rating.allow_tags = True

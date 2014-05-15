@@ -221,7 +221,7 @@ THIRD_PARTY_APPS = (
 # Apps specific for this project go here.
 LOCAL_APPS = (
     'apps.accounts',
-    'apps.sites',
+    'apps.main_sites',
     'apps.tips',
     'apps.api',
 )

@@ -8,5 +8,6 @@ from pro_tips.apps.api import views
 urlpatterns = patterns('pro_tips.apps.api.views',
 
         url(r'^languages$', views.ListLanguages.as_view(), name='languages_list'),
-        url(r'^tip$', views.ListTips.as_view(), name='tips'),
+        url(r'^tips$', views.ListTips.as_view(), name='tips'),
+        url(r'^tip/comments/$', views.CommentsApiView.as_view(), name='comment_for_tip'),
 )

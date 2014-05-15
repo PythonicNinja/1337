@@ -1,7 +1,12 @@
-from django.shortcuts import render
+from contrib.comments import Comment
+from contrib.comments.templatetags.comments import CommentListNode
+from contrib.sites.models import Site
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from rest_framework import generics
+from rest_framework import views
+from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 
@@ -23,3 +28,20 @@ class ListTips(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
     filter_fields = ('user', 'title', 'language')
     paginate_by = 100
+
+
+class CommentsApiView(views.APIView):
+    authentication_classes = (SessionAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+
+    def get(self, request, format=None):
+        '''
+            returns comment for tip
+        '''
+        tip = get_object_or_404(models.Tip, pk=request.GET.get('id'))
+        site = Site.objects.get_current()
+        comments = Comment.objects.for_model(tip).filter(site = site, is_public = True, is_removed = False)
+        return Response(comments)
+
+

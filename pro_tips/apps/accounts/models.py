@@ -13,3 +13,6 @@ class CUser(AbstractUser):
 class CUserProfile(models.Model):
     user = models.ForeignKey('CUser',verbose_name=_("User"))
     language = models.CharField(_("Language"), max_length=2, choices=LANGUAGES)
+
+    def __unicode__(self):
+        return u"%s (%s)" %(self.user, self.language)
