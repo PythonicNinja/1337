@@ -16,7 +16,7 @@ There are dev/production settings templates you can use in directory 'pro_tips/s
 ```python
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.mysql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'pro_tips',
         'USER': 'pro_tips',
         'PASSWORD': '1',
