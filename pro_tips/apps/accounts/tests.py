@@ -6,11 +6,16 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
+from django.core.urlresolvers import resolve
+
+from django.contrib.auth import views as django_views
+
+from pro_tips.apps.accounts import views
 
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.assertEqual(1 + 1, 2)
+class AccountsTests(TestCase):
+
+    # Testing url mappings
+    def test_login_url_resolves_to_login_view(self):
+        found = resolve('/accounts/login/')
+        self.assertEqual(found.func.__name__, django_views.login.__name__)

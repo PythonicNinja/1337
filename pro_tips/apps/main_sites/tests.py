@@ -28,7 +28,7 @@ class HomePageTest(TestCase):
 
     # Testing contexts of pages
     def test_adding_languages_to_the_context(self):
-
+        #TODO: split this test into seperate.
         client = Client()
         response = client.get('/')
 
@@ -46,7 +46,7 @@ class HomePageTest(TestCase):
         self.assertEquals(response.context['languages'].count(), len(shortcuts_from_variable)+1)
 
     def test_languages_in_the_context_request_factory(self):
-
+        #TODO: split this test into seperate.
         factory = RequestFactory()
         request = factory.get('/')
 

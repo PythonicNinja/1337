@@ -8,6 +8,7 @@ SUPPORTED_LANGUAGES = [
     ('python', u'Python'),
     ('javascript', u'Javascript'),
     ('ruby', u'Ruby'),
+    ('coffe-script', u'Coffee script'),
     ('c#', u'C#'),
     ('c++', u'C++'),
     ('java', u'Java'),

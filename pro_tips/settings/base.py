@@ -98,7 +98,7 @@ MEDIA_URL = '/media/'
 
 ########## STATIC FILE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = normpath(join(SITE_ROOT, 'public' , 'static'))
+STATIC_ROOT = normpath(join(SITE_ROOT, 'public', 'static'))
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
@@ -216,6 +216,8 @@ THIRD_PARTY_APPS = (
     'rest_framework',
     'compressor',
     'django_extensions',
+    'easy_thumbnails',
+    'django_filters',
 )
 
 # Apps specific for this project go here.
@@ -287,3 +289,7 @@ SOCIAL_AUTH_ENABLED_BACKENDS = ('google', 'facebook', 'twitter')
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
+
+SOUTH_MIGRATION_MODULES = {
+    'easy_thumbnails': 'easy_thumbnails.south_migrations',
+}

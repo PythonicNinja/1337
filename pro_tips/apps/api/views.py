@@ -6,6 +6,7 @@ from django.shortcuts import render, get_object_or_404
 # Create your views here.
 from rest_framework import generics
 from rest_framework import views
+from rest_framework import filters
 from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -13,7 +14,7 @@ from rest_framework.permissions import IsAuthenticated
 from pro_tips.apps.tips import models
 from pro_tips.apps.api import serializers
 
-class ListLanguages(generics.ListCreateAPIView):
+class LanguagesView(generics.ListCreateAPIView):
     queryset = models.Languages.objects.all()
     serializer_class = serializers.LanguageSerializer
     authentication_classes = (SessionAuthentication,)
@@ -21,16 +22,32 @@ class ListLanguages(generics.ListCreateAPIView):
     paginate_by = 100
 
 
-class ListTips(generics.ListCreateAPIView):
+class TipsView(generics.ListCreateAPIView):
     queryset = models.Tip.objects.all()
     serializer_class = serializers.TipSerializer
     authentication_classes = (SessionAuthentication,)
     permission_classes = (IsAuthenticated,)
+    filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('user', 'title', 'language')
     paginate_by = 100
 
 
-class CommentsApiView(views.APIView):
+class LanguagesList(generics.ListAPIView):
+    queryset = models.Languages.objects.all()
+    serializer_class = serializers.LanguageSerializer
+    paginate_by = 100
+
+
+class TipsList(generics.ListAPIView):
+    queryset = models.Tip.objects.all()
+    serializer_class = serializers.TipSerializer
+    filter_fields = ('user', 'title', 'language')
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('user', 'title', 'language')
+    paginate_by = 100
+
+
+class CommentsList(views.APIView):
     authentication_classes = (SessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 

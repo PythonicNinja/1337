@@ -15,3 +15,5 @@ djangorestframework
 django_compressor
 django-extensions
 Pillow
+easy_thumbnails
+django-filter
