@@ -8,7 +8,7 @@ virtualenv env --no-site-packages
 ###Install all requirements
 ```
 . env/bin/activate
-pip install requirements/base.txt
+pip install -r requirements/base.txt
 ```
 ###Configure application
 There are dev/production settings templates you can use in directory 'pro_tips/settings'.
