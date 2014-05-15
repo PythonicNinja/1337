@@ -1,5 +1,7 @@
-1337
+ProTips Django + Angular with tests
 ====
+[![Build Status](https://travis-ci.org/YoungCoder/1337.svg?branch=master)](https://travis-ci.org/YoungCoder/1337)
+
 #Installation
 ###Create Virtualenv
 ```
