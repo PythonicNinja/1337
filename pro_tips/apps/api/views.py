@@ -21,4 +21,5 @@ class ListTips(generics.ListCreateAPIView):
     serializer_class = serializers.TipSerializer
     authentication_classes = (SessionAuthentication,)
     permission_classes = (IsAuthenticated,)
+    filter_fields = ('user', 'title', 'language')
     paginate_by = 100
