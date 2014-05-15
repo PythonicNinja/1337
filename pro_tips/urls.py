@@ -7,7 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
 
     url(r'^$', include('pro_tips.apps.sites.urls') , name='home'),
-    url(r'^accounts/', include('pro_tips.apps.accounts.urls')),
+    url(r'^accounts/', include('pro_tips.apps.accounts.urls', namespace="accounts")),
 
     #include django-admin urls
     url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS

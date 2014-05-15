@@ -15,7 +15,7 @@ urlpatterns = patterns('pro_tips.apps.accounts.views',
         }, name='login'),
 
        url(r'^logout/$', logout, {
-           'next_page': '/user-profiles/login/'
+           'next_page': '/'
        }, name='logout'),
 
        url(r'^reset/$', password_reset, {
