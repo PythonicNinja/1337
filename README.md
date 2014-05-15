@@ -2,6 +2,15 @@ ProTips Django + Angular with tests
 ====
 [![Build Status](https://travis-ci.org/YoungCoder/1337.svg?branch=master)](https://travis-ci.org/YoungCoder/1337)
 
+
+
+1. [Nowak, Wojciech](https://github.com/YoungCoder).
+2. [Dargacz, Mateusz](https://github.com/mateuszdargacz).
+3. [Napiórkowski, Sebastian](https://github.com/sebnapi).
+4. [Gąsior, Łukasz](https://github.com/lukgas6).
+
+
+
 #Installation
 ###Create Virtualenv
 ```
