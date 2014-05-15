@@ -38,3 +38,4 @@ class Vote(models.Model):
 class Favourite(models.Model):
     user = models.ForeignKey('accounts.CUser', verbose_name=_(u'User'))
     tip = models.ForeignKey('tips.Tip', verbose_name=_('Tip'))
+
