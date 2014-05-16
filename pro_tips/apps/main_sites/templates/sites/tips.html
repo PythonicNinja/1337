@@ -2,6 +2,7 @@
 {% load front_tags thumbnail %}
 
 {% block content %}
+<div>
     <!-- Main component for a primary marketing message or call to action -->
     {% for tip in tips %}
         <div class="col-xs-18 col-sm-6 col-md-3">
@@ -16,4 +17,36 @@
           </div>
         </div>
     {% endfor %}
+
+    <span class="btn btn-primary" data-toggle="modal" data-target="#tip_modal" >Add tip</span>
+
+</div>
+<div ng-controller="AddTipCtrl" class="modal fade" id="tip_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add your tip:</h4><br />
+            </div>
+            <div class="modal-body">
+                <form role="form" ng-hide="loading" id="tip_form" name="tip_form">
+                    <fieldset>
+                        <div class="form-group" ng-class="{ 'has-error': tip_form.tip_contents.$invalid }">
+                            <label for="tip_contents">Tip</label>
+                            <textarea id="tip_contents" ng-model="tip.contents" placeholder="Your tip..." name="tip_contents" class="form-control" rows="5" maxlength="300" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <p class="text-center" ng-repeat="error in errors">{{error}}</p>
+                        </div>
+                        <button ng-disabled="tip_form.$invalid" type="button" class="btn btn-lg btn-success btn-block" ng-click="addTip()">Add tip</button>
+                    </fieldset>
+                </form>
+                <div ng-show="loading">
+                    <p class="text-center"><img src="/static/images/loading.gif" /></p>
+                    <p class="text-center"><b>Adding tip...</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -28,7 +28,7 @@
     <![endif]-->
 </head>
 
-<body>
+<body ng-app="protips">
 
 {% include "includes/menu/menu.html" %}
 
@@ -48,6 +48,10 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="{{ STATIC_URL }}bower_components/jquery/jquery.min.js"></script>
+<script src="{{ STATIC_URL }}bower_components/angular/angular.min.js"></script>
+<script src="{{ STATIC_URL }}js/app.js"></script>
+<script src="{{ STATIC_URL }}js/services.js"></script>
+<script src="{{ STATIC_URL }}js/controllers/tips.js"></script>
 <script src="{{ STATIC_URL }}bower_components/bootstrap/js/bootstrap.min.js"></script>
 {% front_edit_scripts editor="ace" %}
 {% block extra_js %}{% endblock extra_js %}
