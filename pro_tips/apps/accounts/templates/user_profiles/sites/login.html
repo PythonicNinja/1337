@@ -6,7 +6,7 @@
     <span class="login"><strong>{% trans 'Log in form' %}</strong></span>
     <br/><br/>
 
-    <form action="" method="post">
+    <form action="#" method="post">
         {% csrf_token %}
         <input type="hidden" name="next" value="/"/>
 
@@ -36,8 +36,8 @@
                     href="{% url 'accounts:register' %}">{% trans "Don't have account?" %}</a></span>
         </div>
         <div class="col-lg-3 pull-right">
-            <button type="submit"
-                    class="btn btn-danger">{% trans "Log in" %}</button>
+            <input type="submit"
+                    class="btn btn-danger" value="{% trans "Log in" %}"/>
         </div>
 
     </form>

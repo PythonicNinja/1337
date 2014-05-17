@@ -10,6 +10,7 @@ from django.template.response import TemplateResponse
 
 
 from pro_tips.apps.accounts.forms import CUserCreationForm
+from django.contrib.auth import authenticate, login
 
 
 ###PROFILE
@@ -28,7 +29,11 @@ def registration(request):
 
     registration_form = CUserCreationForm(request.POST or None)
     if registration_form.is_valid():
-        return redirect("main")
+        user = registration_form.save()
+        log_in_user = authenticate(username=user.username,
+                                    password=request.POST['password2'])
+        login(request,log_in_user)
+        return redirect("accounts:user-profile")
     context.update({
         'form': registration_form,
     })
