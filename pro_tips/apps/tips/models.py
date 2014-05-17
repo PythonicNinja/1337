@@ -22,6 +22,19 @@ SUPPORTED_LANGUAGES = [
 
 
 class Languages(models.Model):
+    """
+    Languages model for relations
+
+    Creating objects of this model
+    >>> l1 = Languages.objects.create(name="test1", shortcut="shortcut1")
+    >>> l2 = Languages.objects.create(name="test2", shortcut="shortcut2")
+
+    Test unicode method
+    >>> l1.__unicode__()
+    'test1 (shortcut1)'
+    >>> l2.__unicode__()
+    'test1 (shortcut1)'
+    """
     name = models.CharField(verbose_name=_('Language'), max_length=255)
     shortcut = models.CharField(verbose_name=_('Shortcut'), max_length=155)
     img = models.ImageField(verbose_name=_('Image'), upload_to="language/", null=True, blank=True)

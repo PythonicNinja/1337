@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from apps.tips.models import Tip, Languages
+from pro_tips.apps.tips.models import Tip, Languages
 from pro_tips.apps.api import serializers
 
 class LanguagesView(generics.ListCreateAPIView):
@@ -43,7 +43,6 @@ class TipsList(generics.ListAPIView):
     serializer_class = serializers.TipSerializer
     filter_fields = ('user', 'title', 'language')
     filter_backends = (filters.DjangoFilterBackend,)
-    filter_fields = ('user', 'title', 'language')
     paginate_by = 100
 
 

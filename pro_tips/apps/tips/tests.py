@@ -1,6 +1,6 @@
 from django.test import TestCase
-from apps.accounts.models import CUser
-from apps.tips.models import Vote, Tip, Languages
+from pro_tips.apps.accounts.models import CUser
+from pro_tips.apps.tips.models import Vote, Tip, Languages
 
 
 class TipsTest(TestCase):
