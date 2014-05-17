@@ -54,20 +54,47 @@ class TipsTest(TestCase):
         Tests the get_rating_by_tip method
         """
 
-        Vote.objects.create(type=True, user=self.user, tip=self.tip)
+        Vote.objects.create(type=True, user=self.user, tip=self.tip) #Up vote by user
 
         self.assertTrue(self.tip.get_rating() == 1)
+        self.assertTrue(self.tip.vote_set.count() == 1)
 
-        Vote.objects.create(type=True, user=self.user1, tip=self.tip)
+        Vote.objects.create(type=True, user=self.user1, tip=self.tip) #Up vote by user1
 
         self.assertTrue(self.tip.get_rating() == 2)
+        self.assertTrue(self.tip.vote_set.count() == 2)
 
-        Vote.objects.create(type=False, user=self.user2, tip=self.tip)
+        Vote.objects.create(type=False, user=self.user2, tip=self.tip) #Down vote by user2
+
+        self.assertTrue(self.tip.get_rating() == 1)                     # rating should be 1
+        self.assertTrue(self.tip.vote_set.count() == 3)                 # vote count 3
+
+    def test_vote_on_model(self):
+        """
+        Tests if the model method is adding the right Vote Objects to the DB
+        """
+
+        self.tip.vote_up(self.user)
 
         self.assertTrue(self.tip.get_rating() == 1)
+        self.assertTrue(self.tip.vote_set.count() == 1)
+        self.assertTrue(self.user in [vote.user for vote in self.tip.vote_set])
 
+        self.tip.vote_up(self.user1)
+
+        self.assertTrue(self.tip.get_rating() == 2)
+        self.assertTrue(self.tip.vote_set.count() == 2)
+        self.assertTrue(self.user1 in [vote.user for vote in self.tip.vote_set])
+
+        self.tip.vote_down(self.user2)
+
+        self.assertTrue(self.tip.get_rating() == 1)
+        self.assertTrue(self.tip.vote_set.count() == 3)
+        self.assertTrue(self.user2 in [vote.user for vote in self.tip.vote_set])
 
     def tearDown(self):
         Vote.objects.all().delete()
         self.user.delete()
+        self.user1.delete()
+        self.user2.delete()
         self.tip.delete()

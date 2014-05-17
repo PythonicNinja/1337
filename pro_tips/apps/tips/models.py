@@ -44,7 +44,6 @@ class Languages(models.Model):
 
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
-
         return reverse('index')
 
 
@@ -63,8 +62,10 @@ class Tip(models.Model):
         return Vote.objects.get_rating_by_tip(self)
 
     def vote_up(self, user):
-        #TODO: !!
-        pass
+        return Vote.objects.create(type=True, user=user, tip=self)
+
+    def vote_down(self, user):
+        return Vote.objects.create(type=False, user=user, tip=self)
 
 class VoteManager(models.Manager):
     def get_rating_by_tip(self, tip):
