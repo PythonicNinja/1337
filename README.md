@@ -38,6 +38,7 @@ DATABASES = {
 ```
 python manage.py syncdb --settings=pro_tips.settings.chosen_settings_file
 python manage.py migrate --settings=pro_tips.settings.chosen_settings_file
+python manage.py loadtips --settings=pro_tips.settings.chosen_settings_file # if you want to add some default tips
 python manage.py runserver --settings=pro_tips.settings.chosen_settings_file
 ```
 
