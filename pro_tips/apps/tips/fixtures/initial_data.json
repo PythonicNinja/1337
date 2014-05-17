@@ -13,7 +13,7 @@
         "model": "tips.languages",
         "fields": {
             "img": "language/js.png",
-            "name": "Javascript",
+            "name": "JavaScript",
             "shortcut": "javascript"
         }
     },
@@ -31,8 +31,8 @@
         "model": "tips.languages",
         "fields": {
             "img": "language/coffeescript.png",
-            "name": "Coffee script",
-            "shortcut": "coffee-script"
+            "name": "CoffeeScript",
+            "shortcut": "coffeescript"
         }
     },
     {
