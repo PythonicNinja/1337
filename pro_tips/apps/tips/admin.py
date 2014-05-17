@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from adminsortable import admin as sortable
 from django.contrib import admin
-from pro_tips.apps.tips.models import Tip, Vote
+from pro_tips.apps.tips.models import Tip, Vote, Favourite
 
 
 class TipAdmin(admin.ModelAdmin):
@@ -18,4 +18,16 @@ class TipAdmin(admin.ModelAdmin):
     rating.short_description = 'Visitor'
 
 
+class VoteAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Vote
+
+
+class FavouriteAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Favourite
+
+
 admin.site.register(Tip, TipAdmin)
+admin.site.register(Vote, VoteAdmin)
+admin.site.register(Favourite, FavouriteAdmin)
