@@ -39,6 +39,7 @@ DATABASES = {
 ####Create database structure
 ```
 python manage.py syncdb --settings=pro_tips.settings.chosen_settings_file
+python manage.py migrate --settings=pro_tips.settings.chosen_settings_file
 python manage.py runserver --settings=pro_tips.settings.chosen_settings_file
 ```
 

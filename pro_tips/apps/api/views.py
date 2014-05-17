@@ -11,11 +11,11 @@ from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from pro_tips.apps.tips import models
+from apps.tips.models import Tip, Languages
 from pro_tips.apps.api import serializers
 
 class LanguagesView(generics.ListCreateAPIView):
-    queryset = models.Languages.objects.all()
+    queryset = Languages.objects.all()
     serializer_class = serializers.LanguageSerializer
     authentication_classes = (SessionAuthentication,)
     permission_classes = (IsAuthenticated,)
@@ -23,7 +23,7 @@ class LanguagesView(generics.ListCreateAPIView):
 
 
 class TipsView(generics.ListCreateAPIView):
-    queryset = models.Tip.objects.all()
+    queryset = Tip.objects.all()
     serializer_class = serializers.TipSerializer
     authentication_classes = (SessionAuthentication,)
     permission_classes = (IsAuthenticated,)
@@ -33,13 +33,13 @@ class TipsView(generics.ListCreateAPIView):
 
 
 class LanguagesList(generics.ListAPIView):
-    queryset = models.Languages.objects.all()
+    queryset = Languages.objects.all()
     serializer_class = serializers.LanguageSerializer
     paginate_by = 100
 
 
 class TipsList(generics.ListAPIView):
-    queryset = models.Tip.objects.all()
+    queryset = Tip.objects.all()
     serializer_class = serializers.TipSerializer
     filter_fields = ('user', 'title', 'language')
     filter_backends = (filters.DjangoFilterBackend,)
@@ -56,7 +56,7 @@ class CommentsList(views.APIView):
         '''
             returns comment for tip
         '''
-        tip = get_object_or_404(models.Tip, pk=request.GET.get('id'))
+        tip = get_object_or_404(Tip, pk=request.GET.get('id'))
         site = Site.objects.get_current()
         comments = Comment.objects.for_model(tip).filter(site = site, is_public = True, is_removed = False)
         return Response(comments)

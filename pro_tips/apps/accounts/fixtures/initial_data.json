@@ -1,1 +1,20 @@
-[{"pk": 1, "model": "accounts.cuser", "fields": {"username": "superadmin", "first_name": "", "last_name": "", "is_active": true, "is_superuser": true, "is_staff": true, "last_login": "2014-05-15T15:00:30Z", "groups": [], "user_permissions": [], "password": "pbkdf2_sha256$12000$CtXjs2MJfy6U$RiAmsIa1OgMyziPdhcd3FA3YQWTfDtYuTfE1ni1jPFQ=", "email": "", "date_joined": "2014-05-15T14:40:55Z"}}]
+[
+    {
+        "pk": 1,
+        "model": "accounts.cuser",
+        "fields": {
+            "username": "superadmin",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "last_login": "2014-05-15T15:00:30Z",
+            "groups": [],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$12000$CtXjs2MJfy6U$RiAmsIa1OgMyziPdhcd3FA3YQWTfDtYuTfE1ni1jPFQ=",
+            "email": "",
+            "date_joined": "2014-05-15T14:40:55Z"
+        }
+    }
+]
