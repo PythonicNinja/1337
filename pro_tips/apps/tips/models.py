@@ -79,7 +79,7 @@ class Vote(models.Model):
         if not self.pk:  # only execute if it's a new Vote
             field_names = Vote._meta.get_all_field_names()
             field_names.remove("id")
-            fields = {f: getattr(self, f) for f in field_names}
+            fields = dict((f, getattr(self, f)) for f in field_names)
 
             fields.pop("type")   # ignore type
 
