@@ -6,9 +6,9 @@ from django.test.client import RequestFactory
 from django.core.urlresolvers import resolve
 from django.test import TestCase
 
-
 from pro_tips.apps.main_sites import views
 from pro_tips.apps.tips import models
+
 
 class HomePageTest(TestCase):
     fixtures = ['initial_data.json']
@@ -33,7 +33,7 @@ class HomePageTest(TestCase):
         response = client.get('/')
 
         shortcuts_from_db = [lang.shortcut for lang in response.context['languages']]
-        shortcuts_from_variable =  [lang[0] for lang in models.SUPPORTED_LANGUAGES]
+        shortcuts_from_variable = [lang[0] for lang in models.SUPPORTED_LANGUAGES]
 
         self.assertEquals(shortcuts_from_db, shortcuts_from_variable)
 
@@ -43,7 +43,7 @@ class HomePageTest(TestCase):
         })
 
         response = client.get('/')
-        self.assertEquals(response.context['languages'].count(), len(shortcuts_from_variable)+1)
+        self.assertEquals(response.context['languages'].count(), len(shortcuts_from_variable) + 1)
 
     def test_languages_in_the_context_request_factory(self):
         #TODO: split this test into seperate.
@@ -53,7 +53,7 @@ class HomePageTest(TestCase):
         response = views.index(request)
 
         shortcuts_from_db = [lang.shortcut for lang in response.context_data['languages']]
-        shortcuts_from_variable =  [lang[0] for lang in models.SUPPORTED_LANGUAGES]
+        shortcuts_from_variable = [lang[0] for lang in models.SUPPORTED_LANGUAGES]
 
         self.assertEquals(shortcuts_from_db, shortcuts_from_variable)
 
@@ -64,4 +64,4 @@ class HomePageTest(TestCase):
 
         response = views.index(request)
 
-        self.assertEquals(response.context_data['languages'].count(), len(shortcuts_from_variable)+1)
+        self.assertEquals(response.context_data['languages'].count(), len(shortcuts_from_variable) + 1)

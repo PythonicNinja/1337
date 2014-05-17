@@ -3,7 +3,6 @@
 from os.path import abspath, basename, dirname, join, normpath
 from sys import path
 
-
 ########## PATH CONFIGURATION
 # Absolute filesystem path to the Django project directory:
 DJANGO_ROOT = dirname(dirname(abspath(__file__)))
@@ -34,6 +33,7 @@ TEMPLATE_DEBUG = DEBUG
 ADMINS = (
     ('WojtekNowak', 'vojtek.nowak@gmail.com'),
     ('MateuszDargacz', 'mateusz.dargacz@gmail.com'),
+    ('SebNap', 'sebnapi@gmail.com'),
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
@@ -287,9 +287,27 @@ SOCIAL_AUTH_ENABLED_BACKENDS = ('google', 'facebook', 'twitter')
 ##########  END SOCIAL AUTH CONFIGURATION
 
 COMPRESS_PRECOMPILERS = (
-    ('text/less', 'lessc {infile} {outfile}'),
+    ('text/less', 'lessc "{infile}" "{outfile}"'),
 )
 
 SOUTH_MIGRATION_MODULES = {
     'easy_thumbnails': 'easy_thumbnails.south_migrations',
+}
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console':{
+                'level': 'DEBUG',
+                'class': 'logging.StreamHandler'
+            },
+    },
+    'loggers': {
+        'apps.tips': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
 }
