@@ -9,14 +9,11 @@
     </p>
 
     <div class="row">
-        <div class="col-xs-18 col-sm-6 col-md-3" ng-repeat="tip in tips">
+        <div class="col-md-6" ng-repeat="tip in tips">
           <div class="thumbnail">
               <h2>{[{tip.title}]}</h2>
-                <img ng-if="tip.language.img" src="{% thumbnail tip.language.img 0x150 %}" alt=""/>
-                <img ng-if="!tip.language.img" src="http://placehold.it/500x300" alt="">
-              <div class="caption">
-                <h4>Thumbnail label</h4>
-                <p>{[{tip.description}]}</p>
+              <div class="tip-description" data-markdown="">
+               {[{tip.description}]}
             </div>
           </div>
         </div>
