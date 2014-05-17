@@ -78,19 +78,19 @@ class TipsTest(TestCase):
 
         self.assertTrue(self.tip.get_rating() == 1)
         self.assertTrue(self.tip.vote_set.count() == 1)
-        self.assertTrue(self.user in [vote.user for vote in self.tip.vote_set])
+        self.assertTrue(self.user in [vote.user for vote in self.tip.vote_set.iterator()])
 
         self.tip.vote_up(self.user1)
 
         self.assertTrue(self.tip.get_rating() == 2)
         self.assertTrue(self.tip.vote_set.count() == 2)
-        self.assertTrue(self.user1 in [vote.user for vote in self.tip.vote_set])
+        self.assertTrue(self.user1 in [vote.user for vote in self.tip.vote_set.iterator()])
 
         self.tip.vote_down(self.user2)
 
         self.assertTrue(self.tip.get_rating() == 1)
         self.assertTrue(self.tip.vote_set.count() == 3)
-        self.assertTrue(self.user2 in [vote.user for vote in self.tip.vote_set])
+        self.assertTrue(self.user2 in [vote.user for vote in self.tip.vote_set.iterator()])
 
     def tearDown(self):
         Vote.objects.all().delete()
