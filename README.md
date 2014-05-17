@@ -9,8 +9,6 @@ ProTips Django + Angular with tests
 3. [Napiórkowski, Sebastian](https://github.com/sebnapi).
 4. [Gąsior, Łukasz](https://github.com/lukgas6).
 
-
-
 #Installation
 ###Create Virtualenv
 ```
@@ -41,6 +39,11 @@ DATABASES = {
 python manage.py syncdb --settings=pro_tips.settings.chosen_settings_file
 python manage.py migrate --settings=pro_tips.settings.chosen_settings_file
 python manage.py runserver --settings=pro_tips.settings.chosen_settings_file
+```
+
+####Run tests
+```
+python manage.py test --settings=pro_tips.settings.chosen_settings_file
 ```
 
 
