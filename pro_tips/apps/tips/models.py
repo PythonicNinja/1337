@@ -88,6 +88,7 @@ class Vote(models.Model):
     def save(self, *args, **kwargs):
         """ used to cast a vote, is assuring if user already voted for this tip allows only
             one vote (up or down)
+            Mateuszek: "unique_together=('user', 'tip',)"  Meta field could be easier :)
         """
 
         if not self.pk:  # only execute if it's a new Vote
@@ -123,6 +124,9 @@ class Vote(models.Model):
 class Favourite(models.Model):
     user = models.ForeignKey('accounts.CUser', verbose_name=_(u'User'))
     tip = models.ForeignKey('tips.Tip', verbose_name=_('Tip'))
+
+    class Meta:
+        unique_together = ('user', 'tip',)
 
     def __unicode__(self):
         return u"%s (%s)" % (self.tip, self.user)

@@ -1,6 +1,7 @@
 from django.contrib.comments import Comment
 from django.contrib.comments.templatetags.comments import CommentListNode
 from django.contrib.sites.models import Site
+from django.core.serializers import serialize
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
@@ -11,8 +12,9 @@ from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from pro_tips.apps.tips.models import Tip, Languages
+from pro_tips.apps.tips.models import Tip, Languages, Vote, Favourite
 from pro_tips.apps.api import serializers
+
 
 class LanguagesView(generics.ListCreateAPIView):
     queryset = Languages.objects.all()
@@ -57,7 +59,26 @@ class CommentsList(views.APIView):
         '''
         tip = get_object_or_404(Tip, pk=request.GET.get('id'))
         site = Site.objects.get_current()
-        comments = Comment.objects.for_model(tip).filter(site = site, is_public = True, is_removed = False)
+        comments = Comment.objects.for_model(tip).filter(site=site, is_public=True, is_removed=False)
         return Response(comments)
 
+
+class VotesView(generics.ListCreateAPIView):
+    queryset = Vote.objects.all()
+    serializer_class = serializers.VoteSerializer
+    filter_fields = ('type', 'user', 'tip')
+    filter_backends = (filters.DjangoFilterBackend,)
+    authentication_classes = (SessionAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    paginate_by = 100
+
+
+class FavouriteView(generics.ListCreateAPIView):
+    queryset = Favourite.objects.all()
+    serializer_class = serializers.FavouriteSerializer
+    filter_fields = ('user', 'tip')
+    filter_backends = (filters.DjangoFilterBackend,)
+    authentication_classes = (SessionAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    paginate_by = 100
 

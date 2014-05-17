@@ -4,7 +4,6 @@ __author__ = 'wojtek'
 from datetime import datetime
 from django.db.models.fields import related
 
-
 from rest_framework import serializers
 
 from pro_tips.apps.tips import models
@@ -16,12 +15,19 @@ class LanguageSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Languages
 
-    # def get_img(self, obj):
-    #     return obj.image.url
+        # def get_img(self, obj):
+        #     return obj.image.url
 
 
 class TipSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = models.Tip
 
+
+class VoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Vote
+
+class FavouriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Favourite
