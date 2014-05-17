@@ -16,5 +16,6 @@ def index(request):
 def tips(request):
     ctx = {}
     ctx['tips'] = Tip.objects.all()
+    ctx['languages'] = Languages.objects.all()
 
     return TemplateResponse(request, 'sites/tips.html', ctx)

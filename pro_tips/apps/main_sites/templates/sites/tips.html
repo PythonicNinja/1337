@@ -2,48 +2,67 @@
 {% load front_tags thumbnail %}
 
 {% block content %}
-<div>
+<div ng-controller="TipsCtrl">
     <!-- Main component for a primary marketing message or call to action -->
-    {% for tip in tips %}
-        <div class="col-xs-18 col-sm-6 col-md-3">
+    <p class="text-center">
+        <span class="btn btn-primary btn-lg" data-toggle="modal" data-target="#tip_modal">Add tip</span>
+    </p>
+
+    <div class="row">
+        <div class="col-xs-18 col-sm-6 col-md-3" ng-repeat="tip in tips">
           <div class="thumbnail">
-              <h2>{{ tip.name }}</h2>
-            <img src="http://placehold.it/500x300" alt="">
+              <h2>{[{tip.title}]}</h2>
+                <img ng-if="tip.language.img" src="{% thumbnail tip.language.img 0x150 %}" alt=""/>
+                <img ng-if="!tip.language.img" src="http://placehold.it/500x300" alt="">
               <div class="caption">
                 <h4>Thumbnail label</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
-                <p><a href="#" class="btn btn-info btn-xs" role="button">Button</a> <a href="#" class="btn btn-default btn-xs" role="button">Button</a></p>
+                <p>{[{tip.description}]}</p>
             </div>
           </div>
         </div>
-    {% endfor %}
-
-    <span class="btn btn-primary" data-toggle="modal" data-target="#tip_modal" >Add tip</span>
-
-</div>
-<div ng-controller="AddTipCtrl" class="modal fade" id="tip_modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add your tip:</h4><br />
-            </div>
-            <div class="modal-body">
-                <form role="form" ng-hide="loading" id="tip_form" name="tip_form">
-                    <fieldset>
-                        <div class="form-group" ng-class="{ 'has-error': tip_form.tip_contents.$invalid }">
-                            <label for="tip_contents">Tip</label>
-                            <textarea id="tip_contents" ng-model="tip.contents" placeholder="Your tip..." name="tip_contents" class="form-control" rows="5" maxlength="300" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <p class="text-center" ng-repeat="error in errors">{{error}}</p>
-                        </div>
-                        <button ng-disabled="tip_form.$invalid" type="button" class="btn btn-lg btn-success btn-block" ng-click="addTip()">Add tip</button>
-                    </fieldset>
-                </form>
-                <div ng-show="loading">
-                    <p class="text-center"><img src="/static/images/loading.gif" /></p>
-                    <p class="text-center"><b>Adding tip...</b></p>
+    </div>
+    <div class="row">
+        <p class="text-center">
+        <img src="/static/images/loading.gif" ng-show="loading" class="img-responsive center-block" />
+        <button type="button" ng-click="loadMoreTips()" class="btn btn-success btn-lg" ng-hide="allTipsLoaded || tips.length == 0 || loading"><i class="fa fa-download"></i> Load more tips</button>
+        </p>
+    </div>
+    <div ng-controller="AddTipCtrl" class="modal fade" id="tip_modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add your tip:</h4><br />
+                </div>
+                <div class="modal-body">
+                    <form role="form" ng-hide="loading" id="tip_form" name="tip_form">
+                        <fieldset>
+                            <div class="form-group" ng-class="{ 'has-error': tip_form.tip_title.$invalid }">
+                                <label for="tip_title">Title</label>
+                                <textarea id="tip_title" ng-model="tip.title" placeholder="Title..." name="tip_title" class="form-control" required></textarea>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': tip_form.tip_description.$invalid }">
+                                <label for="tip_description">Description</label>
+                                <textarea id="tip_description" ng-model="tip.description" placeholder="Your tip..." name="tip_description" class="form-control" rows="5" maxlength="300" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="tip_language">Język</label>
+                                <select id="tip_language" name="tip_language" ng-model="tip.language">
+                                    {% for language in languages %}
+                                        <option value="{{ language.pk }}">{{ language.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <p class="text-center" ng-repeat="error in errors">{{error}}</p>
+                            </div>
+                            <button ng-disabled="tip_form.$invalid" type="button" class="btn btn-lg btn-success btn-block" ng-click="addTip()">Add tip</button>
+                        </fieldset>
+                    </form>
+                    <div ng-show="loading">
+                        <p class="text-center"><img src="/static/images/loading.gif" /></p>
+                        <p class="text-center"><b>Adding tip...</b></p>
+                    </div>
                 </div>
             </div>
         </div>

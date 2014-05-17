@@ -43,7 +43,7 @@ class TipsList(generics.ListAPIView):
     serializer_class = serializers.TipSerializer
     filter_fields = ('user', 'title', 'language')
     filter_backends = (filters.DjangoFilterBackend,)
-    paginate_by = 100
+    paginate_by = 4
 
 
 class CommentsList(views.APIView):
