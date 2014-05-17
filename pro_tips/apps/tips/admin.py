@@ -12,7 +12,7 @@ class TipAdmin(admin.ModelAdmin):
         model = Tip
 
     def rating(self, instance):
-        return Vote.objects.get_rating()
+        return Vote.objects.get_rating_by_tip(instance)
 
     rating.allow_tags = True
     rating.short_description = 'Visitor'
