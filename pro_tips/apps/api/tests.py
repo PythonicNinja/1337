@@ -24,7 +24,6 @@ class ApiTest(TestCase):
         self.tip = Tip.objects.create(user=self.user, title="asd",
                                       description="asd", language=self.lang)
 
-
     def test_list_tips_url_resolves_to_list_tips_view(self):
         found = resolve('/api/tips/')
         self.assertEqual(found.func.__name__, views.TipsList.as_view().__name__)
@@ -83,12 +82,20 @@ class ApiTest(TestCase):
         response = self.client.get(reverse('api:tips_logged'))
         self.assertEqual(response.status_code, 200)
 
-    def test_200_tips_logged(self):
+    def test_200_tips_votes(self):
         self.client.login(username='joedoe', password='top_secret')
-        response = self.client.get(reverse('api:tips_logged'))
+        response = self.client.get(reverse('api:tips_votes'))
         self.assertEqual(response.status_code, 200)
 
+    def test_200_favourites_for_tip(self):
+        self.client.login(username='joedoe', password='top_secret')
+        response = self.client.get(reverse('api:favourites_for_tip'))
+        self.assertEqual(response.status_code, 200)
 
+    def test_200_languages_logged(self):
+        self.client.login(username='joedoe', password='top_secret')
+        response = self.client.get(reverse('api:languages_logged'))
+        self.assertEqual(response.status_code, 200)
 
     def tearDown(self):
         self.user.delete()
