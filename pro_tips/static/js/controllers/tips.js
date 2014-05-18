@@ -110,6 +110,7 @@
 
         $scope.addComment = function() {
             api.post("/comment/add/", {tip_id: $scope.$parent.tip.id, comment_text: $scope.comment}, function() {
+                $scope.comment = "";
                 $scope.fetchComments();
             });
         };
