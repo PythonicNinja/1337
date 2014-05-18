@@ -9,7 +9,7 @@ ProTips Django + Angular with tests
 3. [Napiórkowski, Sebastian](https://github.com/sebnapi).
 4. [Gąsior, Łukasz](https://github.com/lukgas6).
 
-#[Website url](http://skorzenno.pl/).
+#[Website](http://skorzenno.pl/)
 
 
 
