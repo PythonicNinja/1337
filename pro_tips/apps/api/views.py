@@ -1,7 +1,11 @@
+import json
+from django.contrib.auth.decorators import login_required
 from django.contrib.comments import Comment
 from django.contrib.comments.templatetags.comments import CommentListNode
 from django.contrib.sites.models import Site
 from django.core.serializers import serialize
+from django.db.models import Count
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
@@ -81,4 +85,22 @@ class FavouriteView(generics.ListCreateAPIView):
     authentication_classes = (SessionAuthentication,)
     permission_classes = (IsAuthenticated,)
     paginate_by = 100
+
+
+def get_votes_for_tip(request, tip):
+    tip = get_object_or_404(Tip, pk=tip)
+    votes = Vote.objects.filter(tip=tip)
+    positive = votes.filter(type=True).count()
+    negative = votes.filter(type=False).count()
+    res = {
+        'positive': positive,
+        'negative': negative
+    }
+    return HttpResponse(json.dumps(res), content_type="application/json")
+
+
+
+
+
+
 

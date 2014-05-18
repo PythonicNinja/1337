@@ -56,17 +56,17 @@ class TipsTest(TestCase):
 
         Vote.objects.create(type=True, user=self.user, tip=self.tip) #Up vote by user
 
-        self.assertTrue(self.tip.rating == 1)
+        self.assertTrue(self.tip.get_rating == {'positive':1, 'negative':0})
         self.assertTrue(self.tip.vote_set.count() == 1)
 
         Vote.objects.create(type=True, user=self.user1, tip=self.tip) #Up vote by user1
 
-        self.assertTrue(self.tip.rating == 2)
+        self.assertTrue(self.tip.get_rating == {'positive':2, 'negative':0})
         self.assertTrue(self.tip.vote_set.count() == 2)
 
         Vote.objects.create(type=False, user=self.user2, tip=self.tip) #Down vote by user2
 
-        self.assertTrue(self.tip.rating == 1)                     # rating should be 1
+        self.assertTrue(self.tip.get_rating == {'positive':2, 'negative':1})                     # rating should be 1
         self.assertTrue(self.tip.vote_set.count() == 3)                 # vote count 3
 
     def test_vote_on_model(self):
@@ -76,19 +76,30 @@ class TipsTest(TestCase):
 
         self.tip.vote_up(self.user)
 
-        self.assertTrue(self.tip.rating == 1)
+        print self.tip.get_rating
+        self.assertTrue(self.tip.get_rating == {
+            'positive': 1,
+            'negative': 0
+        })
         self.assertTrue(self.tip.vote_set.count() == 1)
         self.assertTrue(self.user in [vote.user for vote in self.tip.vote_set.iterator()])
 
         self.tip.vote_up(self.user1)
 
-        self.assertTrue(self.tip.rating == 2)
+        self.assertTrue(self.tip.get_rating == {
+            'positive': 2,
+            'negative': 0
+        })
+
         self.assertTrue(self.tip.vote_set.count() == 2)
         self.assertTrue(self.user1 in [vote.user for vote in self.tip.vote_set.iterator()])
 
         self.tip.vote_down(self.user2)
 
-        self.assertTrue(self.tip.rating == 1)
+        self.assertTrue(self.tip.get_rating == {
+            'positive': 2,
+            'negative': 1
+        })
         self.assertTrue(self.tip.vote_set.count() == 3)
         self.assertTrue(self.user2 in [vote.user for vote in self.tip.vote_set.iterator()])
 

@@ -68,7 +68,7 @@
         };
 
         $scope.vote = function(voteType) {
-            api.post("/tip/votes/", {tip: tip.id, user: 1, 'type': voteType}, function(result) {
+            api.post("/tips/votes/logged/", {tip: tip.id, user: 1, 'type': voteType}, function(result) {
                 alert("Vote added");
             }, function(err) {
                 alert("Error adding vote: " + err);

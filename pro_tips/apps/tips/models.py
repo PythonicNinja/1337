@@ -71,7 +71,10 @@ class Tip(models.Model):
 class VoteManager(models.Manager):
     def get_rating_by_tip(self, tip):
         votes = self.filter(tip=tip)
-        return votes.filter(type=True).count() - votes.filter(type=False).count()
+        return {
+            'positive': votes.filter(type=True).count(),
+            'negative': votes.filter(type=False).count()
+        }
 
 
 VOTE_CHOICES = [

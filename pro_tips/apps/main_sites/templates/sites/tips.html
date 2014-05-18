@@ -30,6 +30,8 @@
     <div class="row">
         <div class="col-md-12 tip" ng-repeat="tip in tips" ng-click="showDetails(tip)">
           <div class="thumbnail">
+              <i class="fa fa-plus"></i> {[{tip.rating.positive}]}
+              <i class="fa fa-minus"></i> {[{tip.rating.positive}]}
               <h2 class="text-center">{[{tip.title}]}</h2>
               <div class="tip-description" data-markdown="">{[{tip.description | limitTo : 100}]}</div>
           </div>

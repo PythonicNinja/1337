@@ -10,10 +10,11 @@ urlpatterns = patterns('pro_tips.apps.api.views',
         url(r'^tips/$', views.TipsList.as_view(), name='tips_list'),
         url(r'^languages/$', views.LanguagesList.as_view(), name='languages_list'),
         url(r'^tip/comments/$', views.CommentsList.as_view(), name='comment_for_tip'),
-        url(r'^tip/votes/$', views.VotesView.as_view(), name='votes_for_tip'),
+        url(r'^tip/votes/(?P<tip>\d*)/$', views.get_votes_for_tip, name='votes_for_tip'),
         url(r'^tip/favourites/$', views.FavouriteView.as_view(), name='favourites_for_tip'),
         #login required urls
         url(r'^tips/logged/$', views.TipsView.as_view(), name='tips_logged'),
+        url(r'^tips/votes/logged/$', views.VotesView.as_view(), name='tips_votes'),
         url(r'^languages/logged/$', views.LanguagesView.as_view(), name='languages_logged'),
 
 
