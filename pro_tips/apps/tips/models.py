@@ -59,7 +59,7 @@ class Tip(models.Model):
         return u"%s (%s)" % (self.title, self.language)
 
     @property
-    def get_rating(self):
+    def rating(self):
         return Vote.objects.get_rating_by_tip(self)
 
     def vote_up(self, user):
