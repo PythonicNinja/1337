@@ -103,7 +103,7 @@ def get_votes_for_tip(request, tip):
 
 def add_comment(request):
 
-    tip = get_object_or_404(Tip, pk = request.POST.get('tip_id'))
+    tip = get_object_or_404(Tip, pk = int(request.POST.get('tip_id')))
     user = request.user
     comment_text = request.POST.get('comment_text')
 
