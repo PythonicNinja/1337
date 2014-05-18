@@ -13,7 +13,7 @@
           <div class="thumbnail">
               <h2>{[{tip.title}]}</h2>
               <div class="tip-description" data-markdown="">
-               {[{tip.description}]}
+               {[{tip.description | limitTo : 100}]}
             </div>
           </div>
         </div>
