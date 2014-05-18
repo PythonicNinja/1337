@@ -7,15 +7,15 @@
     <div class="row">
         {% for language in languages %}
         <a href="/tips/?language={{ language.pk }}">
-            <div class="col-xs-18 col-sm-6 col-md-3 language" ng-class="{true:'selected-language', false:''}[{{language.pk}}==language]">
+            <div class=" col-md-2 language" ng-class="{true:'selected-language', false:''}[{{language.pk}}==language]">
               <div class="thumbnail">
                   {% if language.img %}
-                      <img src="{% thumbnail language.img 0x150 %}" alt=""/>
+                      <img src="{% thumbnail language.img 0x50 %}" alt=""/>
                   {% else %}
                     <img src="http://placehold.it/250x150" alt="">
                   {% endif %}
                   <div class="caption">
-                    <h2 class="text-center">{{ language.name }}</h2>
+                    <h5 class="text-center">{{ language.name }}</h5>
                 </div>
               </div>
             </div>
