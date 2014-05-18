@@ -20,14 +20,12 @@ class ApiTest(TestCase):
 
     def setUp(self):
         self.lang = Languages.objects.get(id=1)
-        self.user = CUser.objects.create_user(
-            username='joedoe', password='top_secret')
+        self.user = CUser.objects.create_user('test', 'test@test.com', 'test')
         self.tip = Tip.objects.create(user=self.user, title="asd",
                                       description="asd", language=self.lang)
 
     def login(self):
         self.client = Client()
-        self.user = CUser.objects.create_user('test', 'test@test.com', 'test')
         self.client.login(username='test', password='test')
 
     # url mappings
@@ -75,32 +73,32 @@ class ApiTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_200_api_tips_logged(self):
-        self.client.login( username='joedoe', password='top_secret')
+        self.login()
         response = self.client.get(reverse('api:tips_logged'))
         self.assertEqual(response.status_code, 200)
 
     def test_200_api_votes_for_tip(self):
-        self.client.login(username='joedoe', password='top_secret')
+        self.login()
         response = self.client.get(reverse('api:votes_for_tip', kwargs={'tip': self.tip.pk}))
         self.assertEqual(response.status_code, 200)
 
     def test_200_tips_logged(self):
-        self.client.login(username='joedoe', password='top_secret')
+        self.login()
         response = self.client.get(reverse('api:tips_logged'))
         self.assertEqual(response.status_code, 200)
 
     def test_200_tips_votes(self):
-        self.client.login(username='joedoe', password='top_secret')
+        self.login()
         response = self.client.get(reverse('api:tips_votes'))
         self.assertEqual(response.status_code, 200)
 
     def test_200_favourites_for_tip(self):
-        self.client.login(username='joedoe', password='top_secret')
+        self.login()
         response = self.client.get(reverse('api:favourites_for_tip'))
         self.assertEqual(response.status_code, 200)
 
     def test_200_languages_logged(self):
-        self.client.login(username='joedoe', password='top_secret')
+        self.login()
         response = self.client.get(reverse('api:languages_logged'))
         self.assertEqual(response.status_code, 200)
 
