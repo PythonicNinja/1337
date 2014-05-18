@@ -74,6 +74,8 @@
 
         $scope.tip = tip;
 
+        $scope.comment = "";
+
         $scope.voteUp = function() {
             $scope.vote(true);
         };
@@ -93,6 +95,24 @@
         $scope.dismiss = function() {
             $modalInstance.dismiss('close');
         };
+
+        $scope.fetchComments = function() {
+            api.fetch("/tip/comments/", {id: $scope.tip.id}, function(comments) {
+                $scope.comments = comments;
+            });
+        };
+
+        $scope.addComment = function() {
+            api.post("/comment/add/", {tip_id: $scope.tip.id, comment_text: $scope.comment}, function() {
+                $scope.fetchComments();
+            });
+        };
+
+        $scope.init = function() {
+            $scope.fetchComments();
+        };
+
+        $scope.init();
 
     });
 

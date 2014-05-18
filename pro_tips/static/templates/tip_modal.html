@@ -9,5 +9,22 @@
             <span class="btn btn-sm btn-success" ng-click="voteUp()">Vote up</span>
             <span class="btn btn-sm btn-warning" ng-click="voteDown()">Vote down</span>
         </p>
+        <div class="comments">
+            <div class="comment" ng-repeat="comment in comments">
+                <blockquote>
+                    <p>{[{comment}]}</p>
+                </blockquote>
+            </div>
+        </div>
+        <form role="form">
+            <fieldset>
+                <div class="form-group">
+                    <label for="comment">Add comment</label>
+                    <textarea id="comment" ng-model="comment" placeholder="Comment..." name="comment" class="form-control" required></textarea>
+                </div>
+                <button type="button" class="btn btn-lg btn-success btn-block" ng-click="addComment()">Add comment</button>
+            </fieldset>
+        </form>
+        </div>
     </div>
 </div>
