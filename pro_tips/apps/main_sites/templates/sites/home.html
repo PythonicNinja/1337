@@ -7,14 +7,15 @@
         {% front_edit "home_lead_description" request.path request.LANGUAGE_CODE %}
             <h1>Protips application</h1>
             <h2> is a reference site for passionate and dedicated developers.</h2>
-
-            <a href="/tips" class="btn btn-primary">Poka tipy</a>
         {% end_front_edit %}
+        <p class="text-center">
+            <a href="/tips" class="btn btn-primary btn-lg">Show all tips</a>
+        </p>
     </div>
 
     <div class="row">
         {% for language in languages %}
-        <a href="{% url "api:tips_list" %}?language={{ language.pk }}">
+        <a href="/tips/?language={{ language.pk }}">
             <div class="col-xs-18 col-sm-6 col-md-3">
               <div class="thumbnail">
                   {% if language.img %}

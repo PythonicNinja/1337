@@ -2,7 +2,9 @@
 
     var module = angular.module('protips');
 
-    module.controller('TipsCtrl', function($scope, $modal, api) {
+    module.controller('TipsCtrl', function($scope, $rootScope, $modal, api) {
+
+        $scope.language = $rootScope.getURLParameter("language");
 
         $scope.currentPage = 1;
         $scope.tips = [];
@@ -14,6 +16,9 @@
                 var params = {
                     page: $scope.currentPage
                 };
+                if ($scope.language) {
+                    params['language'] = $scope.language;
+                }
                 $scope.loading = true;
                 api.fetch("/tips/", params, function(tips) {
                     $scope.tips = $scope.tips.concat(tips.results);
