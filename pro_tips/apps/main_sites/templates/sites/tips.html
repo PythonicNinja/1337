@@ -31,9 +31,7 @@
         <div class="col-md-12 tip" ng-repeat="tip in tips" ng-click="showDetails(tip)">
           <div class="thumbnail">
               <h2 class="text-center">{[{tip.title}]}</h2>
-              <div class="tip-description" data-markdown="">
-               {[{tip.description | limitTo : 100}]}
-            </div>
+              <div class="tip-description" data-markdown="">{[{tip.description | limitTo : 100}]}</div>
           </div>
         </div>
     </div>
