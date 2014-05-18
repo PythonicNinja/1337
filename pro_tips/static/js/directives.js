@@ -7,8 +7,7 @@
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
-                var htmlText = converter.makeHtml(element.text());
-                element.html($compile(htmlText)(scope));
+                element.html(converter.makeHtml(scope.tip.description));
             }
         };
     });
