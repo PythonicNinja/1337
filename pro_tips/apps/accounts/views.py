@@ -14,10 +14,15 @@ from django.contrib.auth import authenticate, login
 
 
 ###PROFILE
+from pro_tips.apps.tips.models import Favourite
+
 
 def user_profile(request):
+    favs = Favourite.objects.filter(user=request.user)
     context = {
-
+        'favs': favs,
+        'favs_count': favs.count(),
+        'alert_count': 0
     }
     return TemplateResponse(request, 'user_profiles/sites/user_profile.html',context)
 

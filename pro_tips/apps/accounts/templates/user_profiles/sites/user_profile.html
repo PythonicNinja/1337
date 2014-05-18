@@ -7,53 +7,51 @@
         <h2 class="section-title">{% trans "User profile" %} {{ request.user }}</h2>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <ul class="nav nav-pills nav-stacked news-list">
                     <li class="active">
                         <a href="#news1" data-toggle="tab" class="">
-                            <h2><i class="fa fa-gamepad"></i> {% trans "Achivements" %}</h2>
+                            <i class="fa fa-gamepad"></i> {% trans "Favs" %} <div class="badge badge-info pull-right">{{ favs_count }}</div>
                         </a>
                     </li>
                     <li>
                         <a href="#news2" data-toggle="tab" class="">
-                            <h2><i class="fa fa-gears"></i> {% trans "Settings" %}</h2>
+                            <i class="fa fa-gears"></i> {% trans "Settings" %}
                         </a>
                     </li>
                     <li>
                         <a href="#news3" data-toggle="tab" class="">
-                            <h2><i class="fa fa-list-alt"></i> {% trans "Alerts" %}</h2>
+                            <i class="fa fa-list-alt"></i> {% trans "Alerts" %} <div class="badge badge-info pull-right">{{ alert_count }}</div>
                         </a>
                     </li>
                     <li>
                         <a href="#news4" data-toggle="tab" class="">
-                            <h2><i class="fa fa-star"></i> {% trans "Fallowers" %}</h2>
+                            <i class="fa fa-star"></i> {% trans "Fallowers" %}
                         </a>
                     </li>
 
                 </ul>
                 <!-- list-group -->
             </div>
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="news1">
                         <article class="news-content">
-                            <h3 class="news-content-title"><i class="fa fa-gamepad"></i> {% trans "Achivements" %}</h3>
-
-
-                            <p>Lorem ipsum Esse laborum ut in non irure pariatur in sunt labore irure veniam nulla irure
-                                exercitation occaecat deserunt qui adipisicing sed magna proident reprehenderit officia
-                                ut magna Ut Ut.</p>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Operam comparandae tutiorem diu
-                                optimus conquisitis agatur modus dolor voluptas, omittam graeca ista, homo adiuvet
-                                occultum verbi imagines physico faciunt. Dicere loquuntur consequentis artibus afranius,
-                                rudem remotis pericula cumque, nescio causam repellendus, amotio derepta laborum
-                                occultarum.</p>
-
-                            <p>Lorem ipsum Dolor nisi anim Duis sint ad minim fugiat commodo qui do irure eiusmod
-                                laborum nisi ullamco sunt tempor est nostrud. Lorem ipsum Culpa magna aute qui in enim
-                                ex cupidatat voluptate in aliquip pariatur esse est.</p>
+                            <h3 class="news-content-title"><i class="fa fa-gamepad"></i> {% trans "Favourites" %}</h3>
+                            <hr/>
+                            {% for fav in favs %}
+                                <div class="media">
+                                  <a class="pull-left" href="#">
+                                    <img class="media-object" alt="64x64" src="{{ fav.tip.language.img.url }}" style="width: 64px; height: 64px;">
+                                  </a>
+                                  <div class="media-body">
+                                    <h4 class="media-heading">{{ fav.tip.title }}</h4>
+                                    {{ fav.tip.description|truncatewords:20 }}
+                                  </div>
+                                </div>
+                                <hr/>
+                            {% endfor %}
                         </article>
                     </div>
                     <div class="tab-pane fade" id="news2">
