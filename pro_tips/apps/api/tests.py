@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.core.urlresolvers import resolve, reverse
 from pro_tips.apps.accounts.models import CUser
 
@@ -16,6 +16,14 @@ from pro_tips.apps.tips.models import Tip, Languages
 # ^api/ ^languages/logged/$ [name='languages_logged']
 class ApiTest(TestCase):
     fixtures = ['initial_data.json']
+
+    def setUp(self):
+        self.lang = Languages.objects.get(id=1)
+        self.user = CUser.objects.create_user(
+            username='joedoe', password='top_secret')
+        self.tip = Tip.objects.create(user=self.user, title="asd",
+                                      description="asd", language=self.lang)
+
 
     def test_list_tips_url_resolves_to_list_tips_view(self):
         found = resolve('/api/tips/')
@@ -59,6 +67,32 @@ class ApiTest(TestCase):
     def test_200_languages_list(self):
         response = self.client.get(reverse('api:languages_list'))
         self.assertEqual(response.status_code, 200)
+
+    def test_200_api_tips_logged(self):
+        self.client.login( username='joedoe', password='top_secret')
+        response = self.client.get(reverse('api:tips_logged'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_200_api_votes_for_tip(self):
+        self.client.login(username='joedoe', password='top_secret')
+        response = self.client.get(reverse('api:votes_for_tip', kwargs={'tip': self.tip.pk}))
+        self.assertEqual(response.status_code, 200)
+
+    def test_200_tips_logged(self):
+        self.client.login(username='joedoe', password='top_secret')
+        response = self.client.get(reverse('api:tips_logged'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_200_tips_logged(self):
+        self.client.login(username='joedoe', password='top_secret')
+        response = self.client.get(reverse('api:tips_logged'))
+        self.assertEqual(response.status_code, 200)
+
+
+
+    def tearDown(self):
+        self.user.delete()
+        self.tip.delete()
 
     # Testing contents of api
 
