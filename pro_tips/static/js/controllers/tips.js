@@ -50,9 +50,25 @@
 
     });
 
-    module.controller('TipModalCtrl', function($scope, $modalInstance, tip) {
+    module.controller('TipModalCtrl', function($scope, $modalInstance, api, tip) {
 
         $scope.tip = tip;
+
+        $scope.voteUp = function() {
+            $scope.vote(true);
+        };
+
+        $scope.voteDown = function() {
+            $scope.vote(false);
+        };
+
+        $scope.vote = function(voteType) {
+            api.post("/tip/votes/", {tip: tip.id, user: 1, 'type': voteType}, function(result) {
+                alert("Vote added");
+            }, function(err) {
+                alert("Error adding vote: " + err);
+            });
+        };
 
         $scope.dismiss = function() {
             $modalInstance.dismiss('close');
