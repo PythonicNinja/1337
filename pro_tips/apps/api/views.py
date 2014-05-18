@@ -66,7 +66,13 @@ class CommentsList(views.APIView):
         tip = get_object_or_404(Tip, pk=request.GET.get('id'))
         site = Site.objects.get_current()
         comments = Comment.objects.for_model(tip).filter(site=site, is_public=True, is_removed=False)
-        return Response(comments)
+        res = []
+        for comment in comments:
+            res.append({
+                'contents': comment.comment,
+                'author': comment.user.username
+            })
+        return HttpResponse(json.dumps(res), content_type="application/json")
 
 
 class VotesView(generics.ListCreateAPIView):
@@ -112,10 +118,10 @@ def add_comment(request):
     comment = Comment.objects.create(**{
         'user': user,
         'comment': comment_text,
-        # tip = 7
-        'content_type': ContentType.objects.get(pk=7),
+        # tip = 13
+        'content_type': ContentType.objects.get(pk=13),
         'site_id': Site.objects.first().pk,
-        'object_pk': tip
+        'object_pk': tip.pk
     })
     res = {
         'status': 'ok'
