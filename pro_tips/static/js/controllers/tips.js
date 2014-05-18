@@ -2,7 +2,7 @@
 
     var module = angular.module('protips');
 
-    module.controller('TipsCtrl', function($scope, api) {
+    module.controller('TipsCtrl', function($scope, $modal, api) {
 
         $scope.currentPage = 1;
         $scope.tips = [];
@@ -30,11 +30,33 @@
             $scope.fetchTips();
         };
 
+        $scope.showDetails = function(tip) {
+            var modalInstance = $modal.open({
+                templateUrl: '/static/templates/tip_modal.html',
+                controller: "TipModalCtrl",
+                resolve: {
+                    tip: function () {
+                        return tip;
+                    }
+                }
+            });
+        };
+
         $scope.init = function() {
             $scope.fetchTips();
         };
 
         $scope.init();
+
+    });
+
+    module.controller('TipModalCtrl', function($scope, $modalInstance, tip) {
+
+        $scope.tip = tip;
+
+        $scope.dismiss = function() {
+            $modalInstance.dismiss('close');
+        };
 
     });
 
