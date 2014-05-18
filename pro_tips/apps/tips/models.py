@@ -89,7 +89,6 @@ class Vote(models.Model):
     def save(self, *args, **kwargs):
         """ used to cast a vote, is assuring if user already voted for this tip allows only
             one vote (up or down)
-            Mateuszek: "unique_together=('user', 'tip',)"  Meta field could be easier :)
         """
 
         if not self.pk:  # only execute if it's a new Vote
