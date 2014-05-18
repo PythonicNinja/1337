@@ -60,11 +60,13 @@ class Tip(models.Model):
 
     @property
     def get_rating(self):
+        #TODO: sebnapi: should not be prefixed by "get_"
         return Vote.objects.get_rating_by_tip(self)
 
     @property
     def get_favs(self):
-        return Favourite.objects.get_favs_by_tip(self)
+        #TODO: sebnapi: should not be prefixed by "get_"
+        return Favourite.objects.get_favs_count_by_tip(self)
 
     def vote_up(self, user):
         return Vote.objects.create(type=True, user=user, tip=self)
@@ -128,9 +130,9 @@ class Vote(models.Model):
         return u"%s (%s)" % (self.type, self.user)
 
 class FavManager(models.Manager):
-    def get_favs_by_tip(self, tip):
-        favs = self.filter(tip=tip)
-        return favs.count()
+    def get_favs_count_by_tip(self, tip):
+        favs_count = self.filter(tip=tip).count()
+        return favs_count
 
 
 class Favourite(models.Model):
