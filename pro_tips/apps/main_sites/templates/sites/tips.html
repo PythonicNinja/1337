@@ -1,61 +1,57 @@
 {% extends "base.html" %}
-{% load front_tags thumbnail %}
+{% load front_tags thumbnail i18n %}
 
 {% block content %}
-<div ng-controller="TipsCtrl">
+<div ng-controller="TipsCtrl" ng-init="initialize('{{ request.user.is_authenticated }}', '{{ request.user.pk }}')">
     <!-- Main component for a primary marketing message or call to action -->
-    <!--<div class="row">-->
-        <!--{% for language in languages %}-->
-        <!--<a href="/tips/?language={{ language.pk }}">-->
-            <!--<div class="col-xs-18 col-sm-6 col-md-3 language" ng-class="{true:'selected-language', false:''}[{{language.pk}}==language]">-->
-              <!--<div class="thumbnail">-->
-                  <!--{% if language.img %}-->
-                      <!--<img src="{% thumbnail language.img 0x150 %}" alt=""/>-->
-                  <!--{% else %}-->
-                    <!--<img src="http://placehold.it/250x150" alt="">-->
-                  <!--{% endif %}-->
-                  <!--<div class="caption">-->
-                    <!--<h2 class="text-center">{{ language.name }}</h2>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-        <!--</a>-->
-        <!--{% endfor %}-->
-    <!--</div>-->
-
-    <div class="row row-offcanvas row-offcanvas-left">
-
-        <!-- sidebar -->
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-            <ul class="nav">
-              <li class="active"><a href="/">Home</a></li>
-                {% for language in languages %}
-                    <li><a href="/tips/?language={{ language.pk }}">{{ language.name }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <div class="col-xs-12 col-sm-9">
-            <div class="row">
-                <div class="col-xs-12 col-sm-9" ng-repeat="tip in tips" ng-click="showDetails(tip)">
-                  <div class="thumbnail">
-                      <i class="fa fa-plus"></i> {[{tip.rating.positive}]}
-                      <i class="fa fa-minus"></i> {[{tip.rating.negative}]}
-                      <h2 class="text-center">{[{tip.title}]}</h2>
-                      <div class="tip-description" data-markdown="">{[{tip.description | limitTo : 100}]}</div>
-                  </div>
+    <div class="row">
+        {% for language in languages %}
+        <a href="/tips/?language={{ language.pk }}">
+            <div class=" col-md-2 language" ng-class="{true:'selected-language', false:''}[{{language.pk}}==language]">
+              <div class="thumbnail">
+                  {% if language.img %}
+                      <img src="{% thumbnail language.img 0x50 %}" alt=""/>
+                  {% else %}
+                    <img src="http://placehold.it/250x150" alt="">
+                  {% endif %}
+                  <div class="caption">
+                    <h5 class="text-center">{{ language.name }}</h5>
                 </div>
+              </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12 col-sm-9">
-                    <img src="/static/images/loading.gif" ng-show="loading" class="img-responsive center-block" />
-                    <button type="button" ng-click="loadMoreTips()" class="btn btn-success btn-lg" ng-hide="allTipsLoaded || tips.length == 0 || loading"><i class="fa fa-download"></i> Load more tips</button>
-                    <span class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#tip_modal">Add tip</span>
-                </div>
-            </div>
-        </div>
+        </a>
+        {% endfor %}
     </div>
 
+    <p class="text-center add-tip">
+        {% if request.user.is_authenticated %}
+            <span class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#tip_modal"><i class="fa fa-plus"></i> {% trans "Add" %}</span>
+        {% else %}
+            <span class="row">
+                <span class="col-md-6"><a href="{% url "accounts:login" %}" class="btn btn-primary btn-block btn-lg" ><i class="fa fa-user"></i> {% trans "Login" %}</a></span>
+                <span class="col-md-6"><a href="{% url "accounts:register" %}" class="btn btn-primary btn-block btn-lg" ><i class="fa fa-user"></i> {% trans "Register to add" %}</a></span>
+            </span>
+        {% endif %}
+    </p>
+
+    <div class="row">
+        <div class="col-md-3 tip" ng-repeat="tip in tips" >
+          {% if request.user.is_authenticated %}<a href="#" ng-click="addToFav(tip)" class="pull-right fav-btn"><i class="fa fa-star"></i> {% trans "Fav" %} </a>{% endif %}
+          <div class="thumbnail" ng-click="showDetails(tip)">
+              <i class="fa fa-plus"></i> {[{tip.rating.positive}]}
+              <i class="fa fa-minus"></i> {[{tip.rating.negative}]}
+              <i class="fa fa-star"></i> {[{tip.favs}]}
+              <h2 class="text-center">{[{tip.title}]}</h2>
+              <div class="tip-description" data-markdown="">{[{tip.description | limitTo : 100}]}</div>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <p class="text-center">
+        <img src="/static/images/loading.gif" ng-show="loading" class="img-responsive center-block" />
+        <button type="button" ng-click="loadMoreTips()" class="btn btn-success btn-lg" ng-hide="allTipsLoaded || tips.length == 0 || loading"><i class="fa fa-download"></i> Load more tips</button>
+        </p>
+    </div>
     <div ng-controller="AddTipCtrl" class="modal fade" id="tip_modal" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">

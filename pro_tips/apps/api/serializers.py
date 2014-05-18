@@ -23,6 +23,7 @@ class LanguageSerializer(serializers.ModelSerializer):
 
 class TipSerializer(serializers.ModelSerializer):
     rating = Field(source="get_rating")
+    favs = Field(source="get_favs")
 
     class Meta:
         model = models.Tip

@@ -62,6 +62,10 @@ class Tip(models.Model):
     def get_rating(self):
         return Vote.objects.get_rating_by_tip(self)
 
+    @property
+    def get_favs(self):
+        return Favourite.objects.get_favs_by_tip(self)
+
     def vote_up(self, user):
         return Vote.objects.create(type=True, user=user, tip=self)
 
@@ -123,10 +127,17 @@ class Vote(models.Model):
     def __unicode__(self):
         return u"%s (%s)" % (self.type, self.user)
 
+class FavManager(models.Manager):
+    def get_favs_by_tip(self, tip):
+        favs = self.filter(tip=tip)
+        return favs.count()
+
 
 class Favourite(models.Model):
     user = models.ForeignKey('accounts.CUser', verbose_name=_(u'User'))
     tip = models.ForeignKey('tips.Tip', verbose_name=_('Tip'))
+
+    objects = FavManager()
 
     class Meta:
         unique_together = ('user', 'tip',)

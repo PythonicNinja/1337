@@ -4,6 +4,15 @@
 
     module.controller('TipsCtrl', function($scope, $rootScope, $modal, api) {
 
+
+        $scope.initialize = function (is_authenticated, user_id) {
+            $scope.is_authenticated = is_authenticated;
+            $scope.user_id = user_id;
+            console.log($scope.is_authenticated);
+            console.log($scope.user_id);
+        };
+
+
         $scope.language = $rootScope.getURLParameter("language");
 
         $scope.currentPage = 1;
@@ -28,6 +37,14 @@
                     }
                 });
             }
+        };
+
+        $scope.addToFav = function(tip) {
+            api.post("/tip/favourites/logged/", {tip: tip.id, user: $scope.user_id}, function(result) {
+                alert("Fav added");
+            }, function(err) {
+                alert("Error adding fav: " + err);
+            });
         };
 
         $scope.loadMoreTips = function() {
