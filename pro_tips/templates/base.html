@@ -1,62 +1,61 @@
 {% load front_tags compress %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico">
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico">
 
-    <title>{{ TITLE }}</title>
+        <title>{{ TITLE }}</title>
 
-    {% compress css %}
-        <!-- Bootstrap core CSS -->
-        <link href="{{ STATIC_URL }}bower_components/bootstrap/css/bootstrap.min.css"
-              rel="stylesheet">
-        <link href="{{ STATIC_URL }}bower_components/fontawesome/css/font-awesome.min.css"
-              rel="stylesheet">
-        <link rel="stylesheet" type="text/less" media="all" href="{{ STATIC_URL }}less/style.less"/>
-        {% block extra_css %}{% endblock extra_css %}
-    {% endcompress %}
+        {% compress css %}
+            <!-- Bootstrap core CSS -->
+            <link href="{{ STATIC_URL }}bower_components/bootstrap/css/bootstrap.min.css"
+                  rel="stylesheet">
+            <link href="{{ STATIC_URL }}bower_components/fontawesome/css/font-awesome.min.css"
+                  rel="stylesheet">
+            <link rel="stylesheet" type="text/less" media="all" href="{{ STATIC_URL }}less/style.less"/>
+            {% block extra_css %}{% endblock extra_css %}
+        {% endcompress %}
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-<body ng-app="protips">
+    </head>
 
-{% include "includes/menu/menu.html" %}
+    <body ng-app="protips">
+        {% include "includes/menu/menu.html" %}
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="container">
 
-            {% block content %}{% endblock %}
+                    {% block content %}{% endblock %}
 
+                </div>
+                <!-- /container -->
+            </div>
         </div>
-        <!-- /container -->
-    </div>
-</div>
 
-{% include "includes/footer/footer.html" %}
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="{{ STATIC_URL }}bower_components/jquery/jquery.min.js"></script>
-<script src="{{ STATIC_URL }}bower_components/angular/angular.min.js"></script>
-<script src="{{ STATIC_URL }}bower_components/ui-bootstrap/ui-bootstrap-tpls-0.11.0.min.js"></script>
-<script src="{{ STATIC_URL }}js/app.js"></script>
-<script src="{{ STATIC_URL }}js/services.js"></script>
-<script src="{{ STATIC_URL }}js/directives.js"></script>
-<script src="{{ STATIC_URL }}js/controllers/tips.js"></script>
-<script src="{{ STATIC_URL }}bower_components/bootstrap/js/bootstrap.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>
-{% front_edit_scripts editor="ace" %}
-{% block extra_js %}{% endblock extra_js %}
-</body>
+        {% include "includes/footer/footer.html" %}
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="{{ STATIC_URL }}bower_components/jquery/jquery.min.js"></script>
+        <script src="{{ STATIC_URL }}bower_components/angular/angular.min.js"></script>
+        <script src="{{ STATIC_URL }}bower_components/ui-bootstrap/ui-bootstrap-tpls-0.11.0.min.js"></script>
+        <script src="{{ STATIC_URL }}js/app.js"></script>
+        <script src="{{ STATIC_URL }}js/services.js"></script>
+        <script src="{{ STATIC_URL }}js/directives.js"></script>
+        <script src="{{ STATIC_URL }}js/controllers/tips.js"></script>
+        <script src="{{ STATIC_URL }}bower_components/bootstrap/js/bootstrap.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>
+        {% front_edit_scripts editor="ace" %}
+        {% block extra_js %}{% endblock extra_js %}
+    </body>
 </html>
