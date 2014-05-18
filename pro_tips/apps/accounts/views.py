@@ -16,7 +16,7 @@ from django.contrib.auth import authenticate, login
 ###PROFILE
 from pro_tips.apps.tips.models import Favourite
 
-
+@login_required
 def user_profile(request):
     favs = Favourite.objects.filter(user=request.user)
     context = {

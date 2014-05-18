@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.core.urlresolvers import resolve, reverse
 from pro_tips.apps.accounts.models import CUser
 
@@ -17,6 +17,12 @@ from pro_tips.apps.tips.models import Tip, Languages
 class ApiTest(TestCase):
     fixtures = ['initial_data.json']
 
+    def login(self):
+        self.client = Client()
+        self.user = CUser.objects.create_user('test', 'test@test.com', 'test')
+        self.client.login(username='test', password='test')
+
+    # url mappings
     def test_list_tips_url_resolves_to_list_tips_view(self):
         found = resolve('/api/tips/')
         self.assertEqual(found.func.__name__, views.TipsList.as_view().__name__)
@@ -60,6 +66,57 @@ class ApiTest(TestCase):
         response = self.client.get(reverse('api:languages_list'))
         self.assertEqual(response.status_code, 200)
 
+    def test_302_add_comment(self):
+        response = self.client.get(reverse('api:add_comment'))
+        #redirect to login page
+        self.assertEqual(response.status_code, 302)
+
+    # Status 403 test authenticated views without login
+    def test_403_tips_logged(self):
+        response = self.client.get(reverse('api:tips_logged'))
+        self.assertEqual(response.status_code, 403)
+
+    def test_403_tips_votes(self):
+        response = self.client.get(reverse('api:tips_votes'))
+        self.assertEqual(response.status_code, 403)
+
+    def test_403_favourites_for_tip(self):
+        response = self.client.get(reverse('api:favourites_for_tip'))
+        self.assertEqual(response.status_code, 403)
+
+    def test_403_languages_logged(self):
+        response = self.client.get(reverse('api:languages_logged'))
+        self.assertEqual(response.status_code, 403)
+
+    # Status 200 test authenticated views with login
+    def test_200_add_comment(self):
+        self.login()
+        response = self.client.get(reverse('api:add_comment'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_200_tips_logged(self):
+        self.login()
+        response = self.client.get(reverse('api:tips_logged'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_200_tips_votes(self):
+        self.login()
+        response = self.client.get(reverse('api:tips_votes'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_200_favourites_for_tip(self):
+        self.login()
+        response = self.client.get(reverse('api:favourites_for_tip'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_200_languages_logged(self):
+        self.login()
+        response = self.client.get(reverse('api:languages_logged'))
+        self.assertEqual(response.status_code, 200)
+
+
     # Testing contents of api
+
+
 
 

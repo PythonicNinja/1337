@@ -106,25 +106,27 @@ def get_votes_for_tip(request, tip):
     }
     return HttpResponse(json.dumps(res), content_type="application/json")
 
-
+@login_required
 def add_comment(request):
-    payload = json.loads(request.body)
+    res = {}
+    if request.body:
+        payload = json.loads(request.body)
 
-    tip_id = int(payload.get('tip_id'))
-    tip = get_object_or_404(Tip, pk=tip_id)
-    user = request.user
-    comment_text = payload.get('comment_text')
+        tip_id = int(payload.get('tip_id'))
+        tip = get_object_or_404(Tip, pk=tip_id)
+        user = request.user
+        comment_text = payload.get('comment_text')
 
-    comment = Comment.objects.create(**{
-        'user': user,
-        'comment': comment_text,
-        # tip = 13
-        'content_type': ContentType.objects.get(pk=13),
-        'site_id': Site.objects.first().pk,
-        'object_pk': tip.pk
-    })
-    res = {
-        'status': 'ok'
-    }
+        comment = Comment.objects.create(**{
+            'user': user,
+            'comment': comment_text,
+            # tip = 13
+            'content_type': ContentType.objects.get(pk=13),
+            'site_id': Site.objects.first().pk,
+            'object_pk': tip.pk
+        })
+        res['status'] = 'ok'
+    else:
+        res['status'] = 'fail'
 
     return HttpResponse(json.dumps(res), content_type="application/json")

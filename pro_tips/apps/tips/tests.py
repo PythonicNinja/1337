@@ -76,7 +76,6 @@ class TipsTest(TestCase):
 
         self.tip.vote_up(self.user)
 
-        print self.tip.get_rating
         self.assertTrue(self.tip.get_rating == {
             'positive': 1,
             'negative': 0
