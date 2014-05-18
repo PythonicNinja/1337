@@ -27,7 +27,6 @@ class AccountsTests(TestCase):
         response = self.client.get(reverse('accounts:register'))
         self.assertEqual(response.status_code, 200)
 
-
     def test_200_pwd_change_done(self):
         response = self.client.get(reverse('accounts:password_reset_done'))
         self.assertEqual(response.status_code, 200)

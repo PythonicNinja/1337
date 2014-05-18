@@ -12,6 +12,7 @@ urlpatterns = patterns('pro_tips.apps.api.views',
         url(r'^tip/comments/$', views.CommentsList.as_view(), name='comment_for_tip'),
         url(r'^tip/votes/(?P<tip>\d*)/$', views.get_votes_for_tip, name='votes_for_tip'),
         #login required urls
+
         url(r'^tips/logged/$', views.TipsView.as_view(), name='tips_logged'),
         url(r'^tips/votes/logged/$', views.VotesView.as_view(), name='tips_votes'),
         url(r'^tip/favourites/logged/$', views.FavouriteView.as_view(), name='favourites_for_tip'),

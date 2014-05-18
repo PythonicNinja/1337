@@ -8,8 +8,6 @@
         $scope.initialize = function (is_authenticated, user_id) {
             $scope.is_authenticated = is_authenticated;
             $scope.user_id = user_id;
-            console.log($scope.is_authenticated);
-            console.log($scope.user_id);
         };
 
 
@@ -85,7 +83,7 @@
         };
 
         $scope.vote = function(voteType) {
-            api.post("/tips/votes/logged/", {tip: tip.id, user: 1, 'type': voteType}, function(result) {
+            api.post("/tips/votes/logged/", {tip: tip.id, user: $scope.user_id, 'type': voteType}, function(result) {
                 alert("Vote added");
             }, function(err) {
                 alert("Error adding vote: " + err);

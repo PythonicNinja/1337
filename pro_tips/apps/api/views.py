@@ -53,9 +53,8 @@ class TipsList(generics.ListAPIView):
 
 
 class CommentsList(views.APIView):
-    authentication_classes = (SessionAuthentication,)
-    permission_classes = (IsAuthenticated,)
-
+    # authentication_classes = (SessionAuthentication,)
+    # permission_classes = (IsAuthenticated,)
 
     def get(self, request, format=None):
         '''
