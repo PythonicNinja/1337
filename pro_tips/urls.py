@@ -15,6 +15,8 @@ urlpatterns = patterns('',
     url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
     url(r'^admin/', include(admin.site.urls)),
 
+    (r'^comments/', include('django.contrib.comments.urls')),
+
 
     #Third-party apps urls
     url(r'', include('social_auth.urls')),
