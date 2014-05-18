@@ -4,14 +4,33 @@
 {% block content %}
 <div ng-controller="TipsCtrl">
     <!-- Main component for a primary marketing message or call to action -->
-    <p class="text-center">
-        <span class="btn btn-primary btn-lg" data-toggle="modal" data-target="#tip_modal">Add tip</span>
+    <div class="row">
+        {% for language in languages %}
+        <a href="/tips/?language={{ language.pk }}">
+            <div class="col-xs-18 col-sm-6 col-md-3 language" ng-class="{true:'selected-language', false:''}[{{language.pk}}==language]">
+              <div class="thumbnail">
+                  {% if language.img %}
+                      <img src="{% thumbnail language.img 0x150 %}" alt=""/>
+                  {% else %}
+                    <img src="http://placehold.it/250x150" alt="">
+                  {% endif %}
+                  <div class="caption">
+                    <h2 class="text-center">{{ language.name }}</h2>
+                </div>
+              </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+    <p class="text-center add-tip">
+        <span class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#tip_modal">Add tip</span>
     </p>
 
     <div class="row">
-        <div class="col-md-6 tip" ng-repeat="tip in tips" ng-click="showDetails(tip)">
+        <div class="col-md-12 tip" ng-repeat="tip in tips" ng-click="showDetails(tip)">
           <div class="thumbnail">
-              <h2>{[{tip.title}]}</h2>
+              <h2 class="text-center">{[{tip.title}]}</h2>
               <div class="tip-description" data-markdown="">
                {[{tip.description | limitTo : 100}]}
             </div>
