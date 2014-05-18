@@ -102,10 +102,12 @@ def get_votes_for_tip(request, tip):
 
 
 def add_comment(request):
+    payload = json.loads(request.body)
 
-    tip = get_object_or_404(Tip, pk = int(request.POST.get('tip_id')))
+    tip_id = int(payload.get('tip_id'))
+    tip = get_object_or_404(Tip, pk=tip_id)
     user = request.user
-    comment_text = request.POST.get('comment_text')
+    comment_text = payload.get('comment_text')
 
     comment = Comment.objects.create(**{
         'user': user,
