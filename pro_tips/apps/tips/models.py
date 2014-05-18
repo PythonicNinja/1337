@@ -58,6 +58,7 @@ class Tip(models.Model):
     def __unicode__(self):
         return u"%s (%s)" % (self.title, self.language)
 
+    @property
     def get_rating(self):
         return Vote.objects.get_rating_by_tip(self)
 

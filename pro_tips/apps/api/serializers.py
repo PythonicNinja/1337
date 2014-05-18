@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from rest_framework.fields import Field
+
 __author__ = 'wojtek'
 
 from datetime import datetime
@@ -20,6 +22,7 @@ class LanguageSerializer(serializers.ModelSerializer):
 
 
 class TipSerializer(serializers.ModelSerializer):
+    rating = Field(source="get_rating")
     class Meta:
         model = models.Tip
 
