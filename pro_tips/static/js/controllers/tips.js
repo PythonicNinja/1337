@@ -74,8 +74,6 @@
 
         $scope.tip = tip;
 
-        $scope.comment = "";
-
         $scope.voteUp = function() {
             $scope.vote(true);
         };
@@ -96,14 +94,22 @@
             $modalInstance.dismiss('close');
         };
 
+    });
+
+    module.controller('TipCommentsCtrl', function($scope, api) {
+
+        $scope.comment = "";
+
+        $scope.comments = [];
+
         $scope.fetchComments = function() {
-            api.fetch("/tip/comments/", {id: $scope.tip.id}, function(comments) {
+            api.fetch("/tip/comments/", {id: $scope.$parent.tip.id}, function(comments) {
                 $scope.comments = comments;
             });
         };
 
         $scope.addComment = function() {
-            api.post("/comment/add/", {tip_id: $scope.tip.id, comment_text: $scope.comment}, function() {
+            api.post("/comment/add/", {tip_id: $scope.$parent.tip.id, comment_text: $scope.comment}, function() {
                 $scope.fetchComments();
             });
         };
@@ -115,6 +121,7 @@
         $scope.init();
 
     });
+
 
     module.controller('AddTipCtrl', function($scope, api) {
 
