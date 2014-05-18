@@ -34,8 +34,6 @@ class ApiTest(TestCase):
         response = self.client.get(reverse('api:languages_list'))
         self.assertEqual(response.status_code, 200)
 
+    # Testing contents of api
 
 
-
-
-        # Testing contents of api

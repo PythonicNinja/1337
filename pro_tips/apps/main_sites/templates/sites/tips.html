@@ -33,10 +33,6 @@
             </span>
         {% endif %}
     </p>
-        <h3>Comment</h3>
-        {% load comments %}
-        {% render_comment_form for tips.0 %}
-        {{ form }}
 
     <div class="row">
         <div class="col-md-3 tip" ng-repeat="tip in tips" >
@@ -47,8 +43,6 @@
               <i class="fa fa-star"></i> {[{tip.favs}]}
               <h2 class="text-center">{[{tip.title}]}</h2>
               <div class="tip-description" data-markdown="">{[{tip.description | limitTo : 100}]}</div>
-
-
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@ import json
 from django.contrib.auth.decorators import login_required
 from django.contrib.comments import Comment
 from django.contrib.comments.templatetags.comments import CommentListNode
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.core.serializers import serialize
 from django.db.models import Count
@@ -9,6 +10,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
+from django.views.decorators.csrf import csrf_exempt
+from pro_tips.apps.accounts.models import CUser
 from rest_framework import generics
 from rest_framework import views
 from rest_framework import filters
@@ -49,7 +52,7 @@ class TipsList(generics.ListAPIView):
     serializer_class = serializers.TipSerializer
     filter_fields = ('user', 'title', 'language')
     filter_backends = (filters.DjangoFilterBackend,)
-    paginate_by = 6
+    paginate_by = 8
 
 
 class CommentsList(views.APIView):
@@ -98,8 +101,22 @@ def get_votes_for_tip(request, tip):
     return HttpResponse(json.dumps(res), content_type="application/json")
 
 
+def add_comment(request):
 
+    tip = get_object_or_404(Tip, pk = request.POST.get('tip_id'))
+    user = request.user
+    comment_text = request.POST.get('comment_text')
 
+    comment = Comment.objects.create(**{
+        'user': user,
+        'comment': comment_text,
+        # tip = 7
+        'content_type': ContentType.objects.get(pk=7),
+        'site_id': Site.objects.first().pk,
+        'object_pk': tip
+    })
+    res = {
+        'status': 'ok'
+    }
 
-
-
+    return HttpResponse(json.dumps(res), content_type="application/json")

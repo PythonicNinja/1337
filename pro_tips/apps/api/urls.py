@@ -11,7 +11,7 @@ urlpatterns = patterns('pro_tips.apps.api.views',
         url(r'^languages/$', views.LanguagesList.as_view(), name='languages_list'),
         url(r'^tip/comments/$', views.CommentsList.as_view(), name='comment_for_tip'),
         url(r'^tip/votes/(?P<tip>\d*)/$', views.get_votes_for_tip, name='votes_for_tip'),
-        url(r'^comments/', include('django.contrib.comments.urls')),
+        url(r'^comment/add/$', views.add_comment, name='add_comment'),
         #login required urls
 
         url(r'^tips/logged/$', views.TipsView.as_view(), name='tips_logged'),
