@@ -2,17 +2,6 @@
 
     var module = angular.module('protips');
 
-    module.directive('markdown', function () {
-    var converter = new Showdown.converter();
-    return {
-        restrict: 'A',
-        link: function (scope, element, attrs) {
-            var htmlText = converter.makeHtml(element.text());
-            element.html(htmlText);
-        }
-    };
-    });
-
     module.controller('TipsCtrl', function($scope, api) {
 
         $scope.currentPage = 1;
@@ -79,8 +68,5 @@
         };
 
     });
-
-
-
 
 })()
