@@ -30,7 +30,7 @@ class HomePageTest(TestCase):
     # Testing contexts of pages
     def test_home_page_returns_correct_html(self):
         response= self.client.get("/")
-        self.assertContains( response, '<html>', status_code=200 )
+        self.assertContains( response, '<html>', status_code=200)
 
         self.assertTemplateUsed(response, 'sites/home.html')
 
@@ -41,14 +41,13 @@ class HomePageTest(TestCase):
 
     def test_tips_returns_correct_html(self):
         response= self.client.get("/tips/")
-        self.assertContains( response, '<html>', status_code=200 )
+        self.assertContains( response, '<html>', status_code=200)
 
         self.assertTemplateUsed(response, 'sites/tips.html')
 
         self.assertTemplateUsed(response, 'base.html')
         self.assertTemplateUsed(response, 'includes/menu/menu.html')
         self.assertTemplateUsed(response, 'includes/footer/footer.html')
-
 
 
     def test_adding_languages_to_the_context(self):
@@ -91,3 +90,37 @@ class HomePageTest(TestCase):
         response = views.index(request)
 
         self.assertEquals(response.context_data['languages'].count(), len(shortcuts_from_variable) + 1)
+
+    # Test contents of page
+
+    def test_homepage_display_lang_javascript(self):
+        response = self.client.get("/")
+        self.assertContains(response, 'JavaScript')
+
+    def test_homepage_display_lang_python(self):
+        response = self.client.get("/")
+        self.assertContains(response, 'Python')
+
+    def test_homepage_display_lang_scala(self):
+        response = self.client.get("/")
+        self.assertContains(response, 'Scala')
+
+    def test_homepage_display_lang_ruby(self):
+        response = self.client.get("/")
+        self.assertContains(response, 'Ruby')
+
+    def test_homepage_display_lang_csharp(self):
+        response = self.client.get("/")
+        self.assertContains(response, 'C#')
+
+    def test_homepage_display_lang_cpp(self):
+        response = self.client.get("/")
+        self.assertContains(response, 'C++')
+
+    def test_homepage_display_lang_java(self):
+        response = self.client.get("/")
+        self.assertContains(response, 'Java')
+
+    def test_homepage_display_lang_coffescript(self):
+        response = self.client.get("/")
+        self.assertContains(response, 'CoffeeScript')

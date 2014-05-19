@@ -55,22 +55,43 @@ class AccountsTests(TestCase):
     # Testing contexts of pages
     def test_register_page_returns_correct_html(self):
         response= self.client.get(reverse('accounts:register'))
-        self.assertContains( response, '<html>', status_code=200 )
-
+        self.assertContains( response, '<html>', status_code=200)
         self.assertTemplateUsed(response, 'user_profiles/sites/registration.html')
 
-        self.assertTemplateUsed(response, 'base.html')
-        self.assertTemplateUsed(response, 'includes/menu/menu.html')
+    def test_footer_page_register(self):
+        response = self.client.get(reverse('accounts:register'))
         self.assertTemplateUsed(response, 'includes/footer/footer.html')
+
+    def test_menu_page_register(self):
+        response = self.client.get(reverse('accounts:register'))
+        self.assertTemplateUsed(response, 'includes/menu/menu.html')
+
+    def test_extends_base_html_page_register(self):
+        response = self.client.get(reverse('accounts:register'))
+        self.assertTemplateUsed(response, 'base.html')
+
 
     def test_profile_page_returns_correct_html(self):
-
         self.login()
         response = self.client.get(reverse('accounts:user-profile'))
-        self.assertContains( response, '<html>', status_code=200 )
-
+        self.assertContains( response, '<html>', status_code=200)
         self.assertTemplateUsed(response, 'user_profiles/sites/user_profile.html')
 
-        self.assertTemplateUsed(response, 'base.html')
-        self.assertTemplateUsed(response, 'includes/menu/menu.html')
+    def test_footer_page_profile(self):
+        self.login()
+        response = self.client.get(reverse('accounts:user-profile'))
         self.assertTemplateUsed(response, 'includes/footer/footer.html')
+
+    def test_menu_page_profile(self):
+        self.login()
+        response = self.client.get(reverse('accounts:user-profile'))
+        self.assertTemplateUsed(response, 'includes/menu/menu.html')
+
+    def test_extends_base_html_page_profile(self):
+        self.login()
+        response = self.client.get(reverse('accounts:user-profile'))
+        self.assertTemplateUsed(response, 'base.html')
+
+
+
+
