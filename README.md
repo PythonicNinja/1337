@@ -10,7 +10,7 @@ ProTips Django + Angular with tests
 4. [Gąsior, Łukasz](https://github.com/lukgas6).
 
 # Test Deployment
-If you want to take a peek how this project looks deployed see our [Website](http://skorzenno.pl/).
+If you want to take a peek how this project looks deployed see our [Website](http://protips.ml/).
 
 
 
